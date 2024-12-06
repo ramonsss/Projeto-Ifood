@@ -332,7 +332,7 @@ public class telaDoAdministrador extends javax.swing.JFrame {
 
             Connection con = Conexao.faz_conexao();
 //             
-            String sql = "Select * from dados_lojas";
+            String sql = "SELECT * FROM dados_lojas";
 
             PreparedStatement stmt = con.prepareStatement(
                     sql,
