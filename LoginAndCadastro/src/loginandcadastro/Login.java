@@ -4,12 +4,16 @@
  */
 package loginandcadastro;
 
+import Classes.Acoes;
 import classes_de_conexao.Conexao;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import telaAdmin.CadastrarLoja;
 import telaAdmin.telaDoAdministrador;
+import telaLojista.TelaDoLojista;
 import telaUsuario.telaDoUsuario;
-
 
 /**
  *
@@ -162,13 +166,12 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(pfSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
                             .addGroup(LeftLayout.createSequentialGroup()
-                                .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jButton1))
+                                .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2))
+                            .addComponent(tfUsuario)
                             .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfUsuario))))
+                            .addComponent(jButton1))))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         LeftLayout.setVerticalGroup(
@@ -225,12 +228,16 @@ public class Login extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    
+
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // TODO add your handling code here:
 
-        fazerLogin();
-       
+        Acoes ac = new Acoes(tfUsuario.getText(), "", "", pfSenha.getText(), true);
+        ac.login();
+
+        this.dispose(); // Fecha a minha tela de login
+
+
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -242,71 +249,19 @@ public class Login extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
-    
-    private void fazerLogin() {
-        
-        try {
-            
-            Connection con = Conexao.faz_conexao();
-            
-            String sql = "select * from dados_senhas where email = ? and senha = ?";
-            
-            PreparedStatement stmt = con.prepareStatement(sql);
-            
-            stmt.setString(1, tfUsuario.getText());
-            stmt.setString(2, new String(pfSenha.getPassword()));
-            
-            ResultSet rs = stmt.executeQuery();
-            
-            if(rs.next()) {
-                
-                // Verifica se o login é do admin
-                String usuario = rs.getString("usuario");
-                String email = rs.getString("email");
-                String senha = rs.getString("senha");
+    private int usuarioId;
 
-                // AQUI EH A VERIFICAÇÃO, SE O LOGIN POSTO FOR O DO ADMIN EH PARA ABRIR MINHA CLASSE ADMIN
-
-                if ("admin@admin.com".equals(email) && "admin123".equals(senha)) {
-                    telaDoAdministrador adminFrame = new telaDoAdministrador();
-                    adminFrame.setVisible(true);
-                    adminFrame.pack();
-                    adminFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
-                    this.dispose();
-                } 
-
-                // AQUI EH A VERIFICAÇÃO, SE O LOGIN POSTO FOR O DO USUARIO EH PARA ABRIR MINHA CLASSE USUARIO
-
-                else { 
-                    telaDoUsuario usuarioFrame = new telaDoUsuario();
-                    usuarioFrame.setVisible(true);
-                    usuarioFrame.pack();
-                    usuarioFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
-                    this.dispose();
-                }
-                
-            } 
-            
-            else {
-                JOptionPane.showMessageDialog(null, "Usuário/Senha incorreto");
-            }
-            
-            stmt.close();
-            con.close();
-            
-        } catch(SQLException e) {
-            e.printStackTrace();
-        }
-        
+    public int getUsuarioId() {
+        return usuarioId;
     }
-    
-   
-    
+
+    public void setUsuarioId(int usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Left;
@@ -325,4 +280,3 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField tfUsuario;
     // End of variables declaration//GEN-END:variables
 }
-

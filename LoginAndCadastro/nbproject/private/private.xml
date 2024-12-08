@@ -12,8 +12,16 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/telaUsuario/telaDoUsuario.java</file>
+            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/telaAdmin/CadastrarLoja.java</file>
+            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/loginandcadastro/Cadastro.java</file>
+            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/telaAdmin/telaDoAdministrador.java</file>
+            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/telaAdmin/CadastrarProduto.java</file>
+            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/Classes/Loja.java</file>
+            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/classes_de_conexao/Conexao.java</file>
+            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/Classes/Acoes.java</file>
+            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/telaLojista/TelaDoLojista.java</file>
             <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/telaAdmin/ListarLojasCadastradas.java</file>
+            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/loginandcadastro/Login.java</file>
         </group>
     </open-files>
 </project-private>

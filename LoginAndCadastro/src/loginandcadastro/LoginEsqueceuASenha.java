@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package loginandcadastro;
+import Classes.Acoes;
 import classes_de_conexao.Conexao;
 import java.sql.*;
 import javax.swing.JOptionPane;
@@ -207,41 +208,10 @@ public class LoginEsqueceuASenha extends javax.swing.JFrame {
         }
         
         else {
-            try {
-                Connection con = Conexao.faz_conexao();
-
-                // Verificar se o e-mail existe no banco de dados
-            String sqlCheck = "SELECT * FROM dados_senhas WHERE email = ?";
-            PreparedStatement stmtCheck = con.prepareStatement(sqlCheck);
-            stmtCheck.setString(1, tfEmail.getText());
-            ResultSet rs = stmtCheck.executeQuery();
-
-            if (rs.next()) {  // Se o e-mail for encontrado
-                // E-mail encontrado, proceder com a atualização da senha
-                String sqlUpdate = "UPDATE dados_senhas SET senha = ? WHERE email = ?";
-                PreparedStatement stmtUpdate = con.prepareStatement(sqlUpdate);
-                stmtUpdate.setString(1, new String(pfSenha.getPassword()));
-                stmtUpdate.setString(2, tfEmail.getText());
-
-                stmtUpdate.executeUpdate();
-                stmtUpdate.close();
-                JOptionPane.showMessageDialog(null, "Sua senha foi redefinida com sucesso!");
-                
-                // Limpa os campos
-                tfEmail.setText("");
-                pfSenha.setText("");
-            } else {
-                // E-mail não encontrado no banco de dados
-                JOptionPane.showMessageDialog(null, "E-mail não encontrado. Verifique o e-mail e tente novamente.");
-            }
-
-            stmtCheck.close();
-            con.close();
-                
-
-            } catch (SQLException el) {
-                el.printStackTrace();
-            }
+            
+            Acoes ac = new Acoes("", tfEmail.getText(), "", pfSenha.getText(), true);
+            ac.esqueceuSenha();
+            
         }
         
         

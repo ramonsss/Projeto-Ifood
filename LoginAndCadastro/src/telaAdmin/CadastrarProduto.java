@@ -322,7 +322,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
     public void setIdDaLoja(int IdDaLoja) {
         this.IdDaLoja = IdDaLoja;
     }
-    
+   
     
 
     private void btnCadastrarProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarProdutosActionPerformed

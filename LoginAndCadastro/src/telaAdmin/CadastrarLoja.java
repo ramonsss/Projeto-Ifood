@@ -4,6 +4,7 @@
  */
 package telaAdmin;
 
+import Classes.Acoes;
 import Classes.Loja;
 import classes_de_conexao.Conexao;
 import com.mysql.cj.jdbc.Blob;
@@ -22,6 +23,8 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import loginandcadastro.Login;
+import telaLojista.TelaDoLojista;
 
 
 /**
@@ -36,6 +39,8 @@ public class CadastrarLoja extends javax.swing.JFrame {
     public CadastrarLoja() {
         initComponents();
     }
+    
+    
 
     // instanciar o objeto para o fluxo de bytes
     private FileInputStream fis;
@@ -278,8 +283,42 @@ public class CadastrarLoja extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfLocalizacaoActionPerformed
 
+    
+    private boolean idUsuario = false;
+
+    public boolean getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(boolean idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+    
+    
+    
+    
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
         // TODO add your handling code here:
+        
+        Acoes ac = new Acoes("", "", "", "", false);
+        System.out.println(ac.verify);
+        
+        try {
+            
+            Connection con = Conexao.faz_conexao();
+            
+            String sql = "select * from dados_senhas";
+            
+            
+            
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        
+        
+        
         telaDoAdministrador adminFrame = new telaDoAdministrador();
         adminFrame.setVisible(true);
         adminFrame.pack();
