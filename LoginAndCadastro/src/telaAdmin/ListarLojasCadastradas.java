@@ -49,12 +49,17 @@ public class ListarLojasCadastradas extends javax.swing.JFrame {
      */
     public ListarLojasCadastradas() {
         initComponents();
+        
     }
 
     public ListarLojasCadastradas(boolean verificacao) {
         initComponents();
         this.verifica = verificacao;
+        System.out.println("Esse eh a verificacao do listar Lojas: " + verifica);
     }
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -309,8 +314,10 @@ public class ListarLojasCadastradas extends javax.swing.JFrame {
 
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
         // TODO add your handling code here:
+        
+        
 
-        if (verifica == true) {
+        if (verifica == false) {
             telaDoAdministrador adminFrame = new telaDoAdministrador();
             adminFrame.setVisible(true);
             adminFrame.pack();
@@ -319,11 +326,11 @@ public class ListarLojasCadastradas extends javax.swing.JFrame {
 
             System.out.println("eh adm");
 
-        } else if (verifica == false) {
+        } else if (verifica == true) {
 
             System.out.println("Eh lojista");
 
-            TelaDoLojista lojistaFrame = new TelaDoLojista();
+            Login lojistaFrame = new Login();
             lojistaFrame.setVisible(true);
             lojistaFrame.pack();
             lojistaFrame.setLocationRelativeTo(null); // Para abrir sempre no centro da tela
@@ -338,7 +345,9 @@ public class ListarLojasCadastradas extends javax.swing.JFrame {
     private void btnCadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarProdutoActionPerformed
         // TODO add your handling code here:
 
-        CadastrarProduto cadastrarProdutoFrame = new CadastrarProduto();
+        CadastrarProduto cadastrarProdutoFrame = new CadastrarProduto(verifica);
+        
+        cadastrarProdutoFrame.setVerificar(verifica);
 
         cadastrarProdutoFrame.setIdDaLoja(Integer.parseInt(tfIdLoja.getText()));
 
@@ -352,8 +361,13 @@ public class ListarLojasCadastradas extends javax.swing.JFrame {
 
     private void btnListarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarProdutoActionPerformed
         // TODO add your handling code here:
-        ListarProdutosCadastrados listarProdutoFrame = new ListarProdutosCadastrados();
+        ListarProdutosCadastrados listarProdutoFrame = new ListarProdutosCadastrados(verifica);
+        
+        listarProdutoFrame.setVerify(verifica);
+        
         CadastrarProduto cadastrarProduto = new CadastrarProduto();
+        
+        
 
         System.out.println(tfIdLoja.getText());
 

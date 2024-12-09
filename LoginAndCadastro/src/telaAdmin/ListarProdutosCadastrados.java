@@ -24,6 +24,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import telaLojista.TelaDoLojista;
 
 /**
  *
@@ -31,11 +32,27 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ListarProdutosCadastrados extends javax.swing.JFrame {
 
+    private boolean verify;
+
+    public boolean isVerify() {
+        return verify;
+    }
+
+    public void setVerify(boolean verify) {
+        this.verify = verify;
+    }
+    
+    
     /**
      * Creates new form ListarProdutosCadastrados
      */
     public ListarProdutosCadastrados() {
         initComponents();
+    }
+    
+    public ListarProdutosCadastrados(boolean verify) {
+        initComponents();
+        this.verify = verify;
     }
 
     /**
@@ -303,11 +320,25 @@ public class ListarProdutosCadastrados extends javax.swing.JFrame {
 
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
         // TODO add your handling code here:
-        telaDoAdministrador adminFrame = new telaDoAdministrador();
-        adminFrame.setVisible(true);
-        adminFrame.pack();
-        adminFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
-        this.dispose();
+        if (verify == false) {
+            telaDoAdministrador adminFrame = new telaDoAdministrador();
+            adminFrame.setVisible(true);
+            adminFrame.pack();
+            adminFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
+            this.dispose();
+
+            System.out.println("eh adm");
+
+        } else if (verify == true) {
+
+            System.out.println("Eh lojista");
+
+            Login lojistaFrame = new Login();
+            lojistaFrame.setVisible(true);
+            lojistaFrame.pack();
+            lojistaFrame.setLocationRelativeTo(null); // Para abrir sempre no centro da tela
+            this.dispose();
+        }
     }//GEN-LAST:event_voltarActionPerformed
 
     private void listarProdutoBtnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarProdutoBtnProximoActionPerformed

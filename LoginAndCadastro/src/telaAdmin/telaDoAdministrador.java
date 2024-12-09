@@ -37,10 +37,7 @@ public class telaDoAdministrador extends javax.swing.JFrame {
     public void setVerificacaoAdm(boolean verificacaoAdm) {
         this.verificacaoAdm = verificacaoAdm;
     }
-    
-    
-    
-    
+
     /**
      * Creates new form telaDoAdministrador
      */
@@ -296,7 +293,7 @@ public class telaDoAdministrador extends javax.swing.JFrame {
 
             while (rs.next()) {
 
-                modelo.addRow(new Object[]{rs.getString("id"), rs.getString("usuario"), rs.getString("senha"), rs.getString("email"), rs.getString("cep")});
+                modelo.addRow(new Object[]{rs.getString("id"), rs.getString("usuario"), rs.getString("senha"), rs.getString("email"), rs.getString("cep"), rs.getString("isDonoVer")});
 
             }
 
@@ -355,6 +352,10 @@ public class telaDoAdministrador extends javax.swing.JFrame {
             );
             ResultSet rs = stmt.executeQuery();
 
+            //lista para armazenar as lojas
+            ArrayList<Loja> lojas = new ArrayList<>();
+            int currentIndex = -1;
+
             if (rs.next()) {
                 listarLojasCadastradasFrame.getTfIdLoja().setText(rs.getString("id"));
                 listarLojasCadastradasFrame.getTfNomeLoja().setText(rs.getString("nome"));
@@ -376,6 +377,9 @@ public class telaDoAdministrador extends javax.swing.JFrame {
                         listarLojasCadastradasFrame.getLblFoto().getHeight(), Image.SCALE_SMOOTH));
                 listarLojasCadastradasFrame.getLblFoto().setIcon(foto);
 //              ********************************************************************************************************************
+    
+                
+
 
             }
 
@@ -461,15 +465,14 @@ public class telaDoAdministrador extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        
-        
+
         RemoverLojas RemoverLojas = new RemoverLojas();
         RemoverLojas.setVisible(true);
         RemoverLojas.pack();
         RemoverLojas.setLocationRelativeTo(null); // para abrir sempre no centro da tela
         this.dispose();
-        
-        
+
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

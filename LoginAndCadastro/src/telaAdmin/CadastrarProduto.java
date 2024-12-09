@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import telaLojista.TelaDoLojista;
 
 /**
  *
@@ -23,11 +24,32 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class CadastrarProduto extends javax.swing.JFrame {
 
+    
+    private boolean verificar;
+
+    public boolean isVerificar() {
+        return verificar;
+    }
+
+    public void setVerificar(boolean verificar) {
+        this.verificar = verificar;
+    }
+    
+    
+    
+    
+    
     /**
      * Creates new form CadastrarProduto
      */
     public CadastrarProduto() {
         initComponents();
+    }
+    
+    public CadastrarProduto(boolean verifica) {
+        initComponents();
+        this.verificar = verifica;
+        System.out.println("Esse eh o do Cadastrar Produto: " + verificar);
     }
 
     // instanciar o objeto para o fluxo de bytes
@@ -283,11 +305,29 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
         // TODO add your handling code here:
-        telaDoAdministrador adminFrame = new telaDoAdministrador();
-        adminFrame.setVisible(true);
-        adminFrame.pack();
-        adminFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
-        this.dispose();
+        
+        
+        if (verificar == false) {
+            telaDoAdministrador adminFrame = new telaDoAdministrador();
+            adminFrame.setVisible(true);
+            adminFrame.pack();
+            adminFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
+            this.dispose();
+
+            System.out.println("eh adm");
+
+        } else if (verificar == true) {
+
+            System.out.println("Eh lojista");
+
+            TelaDoLojista lojistaFrame = new TelaDoLojista();
+            lojistaFrame.setVisible(true);
+            lojistaFrame.pack();
+            lojistaFrame.setLocationRelativeTo(null); // Para abrir sempre no centro da tela
+            this.dispose();
+        }
+        
+        
     }//GEN-LAST:event_voltarActionPerformed
 
     private void tfNomeDoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNomeDoProdutoActionPerformed

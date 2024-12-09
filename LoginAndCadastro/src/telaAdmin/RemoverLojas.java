@@ -322,7 +322,7 @@ public class RemoverLojas extends javax.swing.JFrame {
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
         // TODO add your handling code here:
         
-        if (verifica == true) {
+        if (verifica == false) {
             telaDoAdministrador adminFrame = new telaDoAdministrador();
             adminFrame.setVisible(true);
             adminFrame.pack();
@@ -332,7 +332,7 @@ public class RemoverLojas extends javax.swing.JFrame {
             System.out.println("eh adm");
             
             
-        } else if (verifica == false) {
+        } else if (verifica == true) {
             
             System.out.println("Eh lojista");
             

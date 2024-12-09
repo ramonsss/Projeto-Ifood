@@ -5,12 +5,20 @@
 package Classes;
 
 import classes_de_conexao.Conexao;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import telaAdmin.CadastrarLoja;
+import telaAdmin.ListarLojasCadastradas;
 import telaAdmin.telaDoAdministrador;
 import telaLojista.TelaDoLojista;
 import telaUsuario.telaDoUsuario;
@@ -141,7 +149,6 @@ public class Acoes extends javax.swing.JFrame {
 
     }
 
-
     private boolean verify = true;
 
     public boolean isVerify() {
@@ -196,15 +203,11 @@ public class Acoes extends javax.swing.JFrame {
 
                     verify = true;
 
-                    
-
                     TelaDoLojista lojistaFrame = new TelaDoLojista(verify, id);
-                    
-                    
-                    lojistaFrame.setIdDoUsuario(id); 
-                    
+
+                    lojistaFrame.setIdDoUsuario(id);
+
                     lojistaFrame.setVerificacao(verify);
-                    
 
                     // SQL para pegar o nome do lojista pelo ID
                     String sqlNome = "SELECT usuario FROM dados_senhas WHERE id = ?";
@@ -222,8 +225,6 @@ public class Acoes extends javax.swing.JFrame {
                         nomeLojista = rsNome.getString("usuario");  // Recupera o nome do lojista
                     }
 
-                    stmtNome.close();  // Fecha a consulta
-
                     // Passando o nome do lojista para a tela
                     lojistaFrame.setLblMostrarNomeLojista(nomeLojista);  // Passando o nome para o JLabel da tela do lojista
 
@@ -234,26 +235,136 @@ public class Acoes extends javax.swing.JFrame {
                 } // AQUI EH A VERIFICAÇÃO, SE O LOGIN POSTO FOR O DO USUARIO EH PARA ABRIR MINHA CLASSE USUARIO
                 else {
                     telaDoUsuario usuarioFrame = new telaDoUsuario();
+
+                    listarLojas(usuarioFrame);
+
                     usuarioFrame.setVisible(true);
                     usuarioFrame.pack();
                     usuarioFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
                 }
 
-                
-
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário/Senha incorreto");
             }
 
-            stmt.close();
-            con.close();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
-        
 
+    }
+
+    public void listarLojas(telaDoUsuario usuarioFrame) {
+
+        try {
+
+            Connection con = Conexao.faz_conexao();
+//             
+            String sql = "SELECT nome, localizacao, imagem FROM dados_lojas";
+
+            PreparedStatement stmt = con.prepareStatement(
+                    sql,
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY
+            );
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                usuarioFrame.getTfNomeLoja().setText(rs.getString("nome"));
+                usuarioFrame.getTfLocalizacaoLoja().setText(rs.getString("localizacao"));
+
+//              ****************************************para mostrar a imagem ******************************************************
+                Blob blob = (Blob) rs.getBlob("imagem");
+                byte[] img = blob.getBytes(1, (int) blob.length());
+                BufferedImage imagem = null;
+                try {
+                    imagem = ImageIO.read(new ByteArrayInputStream(img));
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+
+                ImageIcon icone = new ImageIcon(imagem);
+                Icon foto = new ImageIcon(icone.getImage().getScaledInstance(usuarioFrame.getLblFoto().getWidth(),
+                        usuarioFrame.getLblFoto().getHeight(), Image.SCALE_SMOOTH));
+                usuarioFrame.getLblFoto().setIcon(foto);
+//              ********************************************************************************************************************
+
+            }
+
+            usuarioFrame.getListarLojaBtnProximo().addActionListener(e -> {
+
+                try {
+
+                    if (rs.next()) {
+                        atualizarInterface(usuarioFrame, rs);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "aqui é um aviso para mostrar que estou muito"
+                                + " coringado nesta parte e implorando por sanidade"
+                                + " mental, e que não tem mais lojas para aparecer.");
+                    }
+
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+
+            });
+
+            usuarioFrame.getListarLojaBtnVoltar().addActionListener(e -> {
+
+                try {
+
+                    if (rs.previous()) {
+                        atualizarInterface(usuarioFrame, rs);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "aqui é um aviso para mostrar que estou muito"
+                                + " coringado nesta parte e implorando por sanidade"
+                                + " mental, e que não tem mais lojas para aparecer.");
+                    }
+
+                } catch (SQLException exyz) {
+                    System.out.println(exyz);
+                }
+
+            });
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        usuarioFrame.setVisible(true);
+        usuarioFrame.pack();
+        usuarioFrame.setLocationRelativeTo(null); // Para abrir sempre no centro da tela
+        this.dispose();
+
+    }
+
+    private void atualizarInterface(telaDoUsuario usuarioFrame, ResultSet rs) {
+        try {
+            // Atualiza os campos com os dados do ResultSet
+            usuarioFrame.getTfNomeLoja().setText(rs.getString("nome"));
+            usuarioFrame.getTfLocalizacaoLoja().setText(rs.getString("localizacao"));
+
+            // Para mostrar a imagem
+            Blob blob = (Blob) rs.getBlob("imagem");
+            byte[] img = blob.getBytes(1, (int) blob.length());
+            BufferedImage imagem = null;
+            try {
+                imagem = ImageIO.read(new ByteArrayInputStream(img));
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+
+            ImageIcon icone = new ImageIcon(imagem);
+            Icon foto = new ImageIcon(icone.getImage().getScaledInstance(
+                    usuarioFrame.getLblFoto().getWidth(),
+                    usuarioFrame.getLblFoto().getHeight(),
+                    Image.SCALE_SMOOTH));
+            usuarioFrame.getLblFoto().setIcon(foto);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public int getId() {

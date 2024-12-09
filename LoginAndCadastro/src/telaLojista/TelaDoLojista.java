@@ -336,7 +336,9 @@ public class TelaDoLojista extends javax.swing.JFrame {
 
     public void listarLojas() {
 
-        ListarLojasCadastradas listarLojasCadastradasFrame = new ListarLojasCadastradas();
+        ListarLojasCadastradas listarLojasCadastradasFrame = new ListarLojasCadastradas(verificacao);
+        
+        listarLojasCadastradasFrame.setVerifica(verificacao);
 
         try {
 
