@@ -2,57 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package telaAdmin;
+package telaUsuario;
 
-import classes_de_conexao.Conexao;
-
-import Classes.Loja;
-import classes_de_conexao.Conexao;
-import loginandcadastro.Login;
-import loginandcadastro.LoginAndCadastro;
-import classes_de_conexao.Conexao;
-import java.awt.Image;
-import java.awt.List;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.sql.*;
-import java.util.ArrayList;
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import telaLojista.TelaDoLojista;
+import telaAdmin.ListarLojasCadastradas;
 
 /**
  *
  * @author Ramon Souza
  */
-public class ListarProdutosCadastrados extends javax.swing.JFrame {
+public class ListarProdutoUsuario extends javax.swing.JFrame {
 
-    private boolean verify;
-
-    public boolean isVerify() {
-        return verify;
-    }
-
-    public void setVerify(boolean verify) {
-        this.verify = verify;
-    }
-    
-    
     /**
-     * Creates new form ListarProdutosCadastrados
+     * Creates new form ListarProdutoUsuario
      */
-    public ListarProdutosCadastrados() {
+    public ListarProdutoUsuario() {
         initComponents();
-    }
-    
-    public ListarProdutosCadastrados(boolean verify) {
-        initComponents();
-        this.verify = verify;
     }
 
     /**
@@ -69,28 +34,24 @@ public class ListarProdutosCadastrados extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         voltar = new javax.swing.JButton();
-        right = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jPanel9 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         lblFoto3 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         tfDescricao = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         tfNomeProduto = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
-        tfIdProduto = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         tfPrecoDoProduto = new javax.swing.JTextField();
         listarProdutoBtnProximo = new javax.swing.JButton();
         listarProdutoBtnAnterior = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
         tfTempoDePreparo = new javax.swing.JTextField();
-        btnRemoverProd = new javax.swing.JButton();
+        btnAddCarrinho = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(900, 600));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 600));
         jPanel1.setLayout(null);
 
@@ -143,10 +104,6 @@ public class ListarProdutosCadastrados extends javax.swing.JFrame {
         jPanel1.add(Left);
         Left.setBounds(0, 0, 340, 620);
 
-        right.setMinimumSize(new java.awt.Dimension(500, 600));
-
-        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
-
         jPanel10.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel10.setPreferredSize(new java.awt.Dimension(500, 500));
 
@@ -160,10 +117,6 @@ public class ListarProdutosCadastrados extends javax.swing.JFrame {
         jLabel17.setText("Descrição do Produto:");
 
         tfNomeProduto.setEditable(false);
-
-        jLabel18.setText("id do Produto:");
-
-        tfIdProduto.setEditable(false);
 
         jLabel19.setText("Preço do Produto:");
 
@@ -184,12 +137,12 @@ public class ListarProdutosCadastrados extends javax.swing.JFrame {
 
         tfTempoDePreparo.setEditable(false);
 
-        btnRemoverProd.setBackground(new java.awt.Color(234, 29, 44));
-        btnRemoverProd.setText("Remover Produto");
-        btnRemoverProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnRemoverProd.addActionListener(new java.awt.event.ActionListener() {
+        btnAddCarrinho.setBackground(new java.awt.Color(51, 153, 0));
+        btnAddCarrinho.setText("Adicionar ao Carrinho");
+        btnAddCarrinho.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAddCarrinho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoverProdActionPerformed(evt);
+                btnAddCarrinhoActionPerformed(evt);
             }
         });
 
@@ -202,22 +155,13 @@ public class ListarProdutosCadastrados extends javax.swing.JFrame {
                 .addComponent(lblFoto3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel19)
-                            .addComponent(tfPrecoDoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(tfIdProduto, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(tfTempoDePreparo, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.LEADING))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                    .addComponent(jLabel19)
+                    .addComponent(tfPrecoDoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21)
+                    .addComponent(tfTempoDePreparo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(tfDescricao)
@@ -230,9 +174,9 @@ public class ListarProdutosCadastrados extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(listarProdutoBtnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(btnRemoverProd, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
+                .addComponent(btnAddCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(listarProdutoBtnProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -242,23 +186,14 @@ public class ListarProdutosCadastrados extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(lblFoto3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tfNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(jLabel18)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(tfIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfTempoDePreparo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(31, 31, 31))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel21)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfTempoDePreparo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(jLabel19))
@@ -273,32 +208,34 @@ public class ListarProdutosCadastrados extends javax.swing.JFrame {
                             .addComponent(listarProdutoBtnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(listarProdutoBtnProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(btnRemoverProd)))
-                .addGap(63, 63, 63))
+                        .addGap(38, 38, 38)
+                        .addComponent(btnAddCarrinho)))
+                .addGap(54, 54, 54))
         );
 
-        jPanel9.add(jPanel10);
-
-        jScrollPane4.setViewportView(jPanel9);
-
-        javax.swing.GroupLayout rightLayout = new javax.swing.GroupLayout(right);
-        right.setLayout(rightLayout);
-        rightLayout.setHorizontalGroup(
-            rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(rightLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 560, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 30, Short.MAX_VALUE)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 30, Short.MAX_VALUE)))
         );
-        rightLayout.setVerticalGroup(
-            rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(rightLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jPanel1.add(right);
-        right.setBounds(340, 0, 560, 620);
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(340, 0, 560, 600);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -306,13 +243,13 @@ public class ListarProdutosCadastrados extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 207, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 36, Short.MAX_VALUE))
         );
 
         pack();
@@ -320,101 +257,23 @@ public class ListarProdutosCadastrados extends javax.swing.JFrame {
 
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
         // TODO add your handling code here:
-        if (verify == false) {
-            telaDoAdministrador adminFrame = new telaDoAdministrador();
-            adminFrame.setVisible(true);
-            adminFrame.pack();
-            adminFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
+            telaDoUsuario telaDoUsuarioFrame = new telaDoUsuario();
+            telaDoUsuarioFrame.setVisible(true);
+            telaDoUsuarioFrame.pack();
+            telaDoUsuarioFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
             this.dispose();
 
-            System.out.println("eh adm");
-
-        } else if (verify == true) {
-
-            System.out.println("Eh lojista");
-
-            Login lojistaFrame = new Login();
-            lojistaFrame.setVisible(true);
-            lojistaFrame.pack();
-            lojistaFrame.setLocationRelativeTo(null); // Para abrir sempre no centro da tela
-            this.dispose();
-        }
+            
     }//GEN-LAST:event_voltarActionPerformed
 
     private void listarProdutoBtnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarProdutoBtnProximoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_listarProdutoBtnProximoActionPerformed
 
-    private void btnRemoverProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverProdActionPerformed
+    private void btnAddCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCarrinhoActionPerformed
         // TODO add your handling code here:
-        removerProduto();
-    }//GEN-LAST:event_btnRemoverProdActionPerformed
+    }//GEN-LAST:event_btnAddCarrinhoActionPerformed
 
-    
-    public void removerProduto() {
-        
-        
-        if (tfIdProduto.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Informe um Id por favor");
-        } else {
-            try {
-
-                Connection con = Conexao.faz_conexao();
-
-                // verificação se o ID existe
-                String verificaSql = "SELECT id_produto FROM dados_produtos WHERE id_produto = ?";
-                PreparedStatement verificaStmt = con.prepareStatement(verificaSql);
-                verificaStmt.setString(1, tfIdProduto.getText());
-                ResultSet rs = verificaStmt.executeQuery();
-
-                // verificação se o ID existe no banco de dados
-                if (!rs.next()) {
-                    JOptionPane.showMessageDialog(null, "O iD informado não existe ou já foi excluido.");
-                } else {
-                    // se o ID existe, ele pede a confirmação para excluir
-                    int confirmacao = JOptionPane.showConfirmDialog(
-                            null,
-                            "Esta ação não pode ser desfeita. Quer continuar?",
-                            "Confirmação de Exclusão",
-                            JOptionPane.YES_NO_OPTION
-                    );
-
-                    if (confirmacao == JOptionPane.YES_OPTION) {
-                        // executa o DELETE
-                        String sql = "DELETE FROM dados_produtos WHERE id_produto = ?";
-                        PreparedStatement stmt = con.prepareStatement(sql);
-                        stmt.setString(1, tfIdProduto.getText());
-                        stmt.execute();
-
-                        JOptionPane.showMessageDialog(null, "Loja removido com Sucesso!");
-                        tfIdProduto.setText("");
-                        tfTempoDePreparo.setText("");
-                        tfNomeProduto.setText("");
-                        tfPrecoDoProduto.setText("");
-                        tfDescricao.setText("");
-                        
-                        lblFoto3.setIcon(new ImageIcon(RemoverLojas.class.getResource("/icon/camera.png")));
-
-                        stmt.close();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "A remoção foi cancelada.");
-                    }
-                }
-
-                verificaStmt.close();
-                rs.close();
-                con.close();
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        
-        
-        
-    }
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -432,50 +291,47 @@ public class ListarProdutosCadastrados extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListarProdutosCadastrados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListarProdutoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListarProdutosCadastrados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListarProdutoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListarProdutosCadastrados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListarProdutoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListarProdutosCadastrados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListarProdutoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListarProdutosCadastrados().setVisible(true);
+                new ListarProdutoUsuario().setVisible(true);
             }
         });
     }
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Left;
-    private javax.swing.JButton btnRemoverProd;
+    private javax.swing.JButton btnAddCarrinho;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblFoto3;
     private javax.swing.JButton listarProdutoBtnAnterior;
     private javax.swing.JButton listarProdutoBtnProximo;
-    private javax.swing.JPanel right;
     private javax.swing.JTextField tfDescricao;
-    private javax.swing.JTextField tfIdProduto;
     private javax.swing.JTextField tfNomeProduto;
     private javax.swing.JTextField tfPrecoDoProduto;
     private javax.swing.JTextField tfTempoDePreparo;
     private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables
+
+
 
     public JLabel getLblFoto3() {
         return lblFoto3;
@@ -493,13 +349,7 @@ public class ListarProdutosCadastrados extends javax.swing.JFrame {
         this.tfDescricao = tfDescricao;
     }
 
-   public javax.swing.JTextField getTfIdProduto() {
-        return tfIdProduto;
-    }
-
-    public void setTfIdProduto(javax.swing.JTextField tfIdProduto) {
-        this.tfIdProduto = tfIdProduto;
-    }
+   
 
     public javax.swing.JTextField getTfNomeProduto() {
         return tfNomeProduto;
@@ -540,5 +390,10 @@ public class ListarProdutosCadastrados extends javax.swing.JFrame {
     public void setListarProdutoBtnProximo(javax.swing.JButton listarProdutoBtnProximo) {
         this.listarProdutoBtnProximo = listarProdutoBtnProximo;
     }
-
+    
+    
+    
+    
+    
+    
 }

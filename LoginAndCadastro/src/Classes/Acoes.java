@@ -259,7 +259,7 @@ public class Acoes extends javax.swing.JFrame {
 
             Connection con = Conexao.faz_conexao();
 //             
-            String sql = "SELECT nome, localizacao, imagem FROM dados_lojas";
+            String sql = "SELECT id, nome, localizacao, imagem FROM dados_lojas";
 
             PreparedStatement stmt = con.prepareStatement(
                     sql,
@@ -269,6 +269,7 @@ public class Acoes extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
+                usuarioFrame.getTfIdLoja().setText(rs.getString("id"));
                 usuarioFrame.getTfNomeLoja().setText(rs.getString("nome"));
                 usuarioFrame.getTfLocalizacaoLoja().setText(rs.getString("localizacao"));
 
@@ -342,6 +343,7 @@ public class Acoes extends javax.swing.JFrame {
     private void atualizarInterface(telaDoUsuario usuarioFrame, ResultSet rs) {
         try {
             // Atualiza os campos com os dados do ResultSet
+            usuarioFrame.getTfIdLoja().setText(rs.getString("id"));
             usuarioFrame.getTfNomeLoja().setText(rs.getString("nome"));
             usuarioFrame.getTfLocalizacaoLoja().setText(rs.getString("localizacao"));
 

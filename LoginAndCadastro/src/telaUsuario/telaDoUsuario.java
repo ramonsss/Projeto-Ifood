@@ -21,7 +21,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import telaAdmin.CadastrarProduto;
 import telaAdmin.ListarProdutosCadastrados;
 
 /**
@@ -62,6 +64,7 @@ public class telaDoUsuario extends javax.swing.JFrame {
         listarLojaBtnProximo = new javax.swing.JButton();
         listarLojaBtnVoltar = new javax.swing.JButton();
         btnListarProduto = new javax.swing.JButton();
+        tfIdLoja = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(900, 600));
@@ -169,6 +172,16 @@ public class telaDoUsuario extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(tfNomeLoja, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfLocalizacaoLoja, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(26, 26, 26))
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
@@ -181,16 +194,6 @@ public class telaDoUsuario extends javax.swing.JFrame {
                         .addGap(115, 115, 115)
                         .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(tfNomeLoja, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfLocalizacaoLoja, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(26, 26, 26))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,15 +208,12 @@ public class telaDoUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfNomeLoja, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfLocalizacaoLoja, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(listarLojaBtnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(listarLojaBtnProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(18, 64, Short.MAX_VALUE)
-                        .addComponent(btnListarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(listarLojaBtnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(listarLojaBtnProximo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnListarProduto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(57, 57, 57))
         );
 
@@ -237,19 +237,27 @@ public class telaDoUsuario extends javax.swing.JFrame {
         jPanel1.add(jPanel2);
         jPanel2.setBounds(340, 0, 560, 600);
 
+        tfIdLoja.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 57, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfIdLoja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 31, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tfIdLoja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(195, 195, 195))
         );
 
         pack();
@@ -271,8 +279,143 @@ public class telaDoUsuario extends javax.swing.JFrame {
     private void btnListarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarProdutoActionPerformed
         // TODO add your handling code here:
         
+        
+        ListarProdutoUsuario listarProdutoFrame = new ListarProdutoUsuario();
+        
+        
+        CadastrarProduto cadastrarProduto = new CadastrarProduto();
+        
+        
+
+
+        try {
+
+            Connection con = Conexao.faz_conexao();
+
+            String sql = "SELECT * FROM dados_produtos WHERE id_loja = ?";
+
+            PreparedStatement stmt = con.prepareStatement(
+                    sql,
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY
+            );
+
+            stmt.setInt(1, Integer.parseInt(tfIdLoja.getText()));
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                listarProdutoFrame.getTfNomeProduto().setText(rs.getString("nome_produto"));
+                listarProdutoFrame.getTfPrecoDoProduto().setText(rs.getString("preco"));
+                listarProdutoFrame.getTfDescricao().setText(rs.getString("descricao_produto"));
+                listarProdutoFrame.getTfTempoDePreparo().setText(rs.getString("tempo_preparo"));
+
+//              ****************************************para mostrar a imagem ******************************************************
+                Blob blob = (Blob) rs.getBlob("imagem");
+                byte[] img = blob.getBytes(1, (int) blob.length());
+                BufferedImage imagem = null;
+                try {
+                    imagem = ImageIO.read(new ByteArrayInputStream(img));
+                } catch (Exception e) {
+                    System.out.println(e);
+                    JOptionPane.showMessageDialog(null, "Algo de errado nao esta certo");
+                }
+
+                ImageIcon icone = new ImageIcon(imagem);
+                Icon foto = new ImageIcon(icone.getImage().getScaledInstance(listarProdutoFrame.getLblFoto3().getWidth(),
+                        listarProdutoFrame.getLblFoto3().getHeight(), Image.SCALE_SMOOTH));
+                listarProdutoFrame.getLblFoto3().setIcon(foto);
+//              ********************************************************************************************************************
+            }
+
+            listarProdutoFrame.getListarProdutoBtnProximo().addActionListener(e -> {
+
+                try {
+
+                    if (rs.next()) {
+                        atualizarInterface(listarProdutoFrame, rs);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "aqui é um aviso para mostrar que estou muito"
+                                + " coringado nesta parte e implorando por sanidade"
+                                + " mental, e que não tem mais lojas para aparecer.");
+                    }
+
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+
+            });
+
+            listarProdutoFrame.getListarProdutoBtnAnterior().addActionListener(e -> {
+
+                try {
+
+                    if (rs.previous()) {
+                        atualizarInterface(listarProdutoFrame, rs);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "aqui é um aviso para mostrar que estou muito"
+                                + " coringado nesta parte e implorando por sanidade"
+                                + " mental, e que não tem mais lojas para aparecer.");
+                    }
+
+                } catch (SQLException exyz) {
+                    System.out.println(exyz);
+                }
+
+            });
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "Algo de errado nao esta certo");
+        }
+
+        listarProdutoFrame.setVisible(true);
+        listarProdutoFrame.pack();
+        listarProdutoFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
+        this.dispose();
+        
+        
+        
+        
     }//GEN-LAST:event_btnListarProdutoActionPerformed
 
+    
+    
+    
+    private void atualizarInterface(ListarProdutoUsuario listarProdutoFrame, ResultSet rs) {
+        try {
+            // Atualiza os campos com os dados do ResultSet
+            listarProdutoFrame.getTfNomeProduto().setText(rs.getString("nome_produto"));
+            listarProdutoFrame.getTfPrecoDoProduto().setText(rs.getString("preco"));
+            listarProdutoFrame.getTfDescricao().setText(rs.getString("descricao_produto"));
+            listarProdutoFrame.getTfTempoDePreparo().setText(rs.getString("tempo_preparo"));
+
+            // Para mostrar a imagem
+            Blob blob = (Blob) rs.getBlob("imagem");
+            byte[] img = blob.getBytes(1, (int) blob.length());
+            BufferedImage imagem = null;
+            try {
+                imagem = ImageIO.read(new ByteArrayInputStream(img));
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+
+            ImageIcon icone = new ImageIcon(imagem);
+            Icon foto = new ImageIcon(icone.getImage().getScaledInstance(
+                    listarProdutoFrame.getLblFoto3().getWidth(),
+                    listarProdutoFrame.getLblFoto3().getHeight(),
+                    Image.SCALE_SMOOTH));
+            listarProdutoFrame.getLblFoto3().setIcon(foto);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -322,6 +465,7 @@ public class telaDoUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel lblFoto;
     private javax.swing.JButton listarLojaBtnProximo;
     private javax.swing.JButton listarLojaBtnVoltar;
+    private javax.swing.JTextField tfIdLoja;
     private javax.swing.JTextField tfLocalizacaoLoja;
     private javax.swing.JTextField tfNomeLoja;
     private javax.swing.JButton voltar;
@@ -370,6 +514,16 @@ public class telaDoUsuario extends javax.swing.JFrame {
     public void setListarLojaBtnVoltar(JButton listarLojaBtnVoltar) {
         this.listarLojaBtnVoltar = listarLojaBtnVoltar;
     }
+
+    public JTextField getTfIdLoja() {
+        return tfIdLoja;
+    }
+
+    public void setTfIdLoja(JTextField tfIdLoja) {
+        this.tfIdLoja = tfIdLoja;
+    }
+    
+    
     
     
     
