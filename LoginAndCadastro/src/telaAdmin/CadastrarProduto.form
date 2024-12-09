@@ -163,7 +163,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="tfTempoDePreparo" alignment="1" pref="250" max="32767" attributes="0"/>
                           <Component id="tfNomeDoProduto" alignment="0" max="32767" attributes="0"/>
-                          <Component id="tfPreco" alignment="0" max="32767" attributes="0"/>
+                          <Component id="tfPreco" alignment="0" min="-2049" max="32767" attributes="0"/>
                           <Component id="tfDescricao" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">

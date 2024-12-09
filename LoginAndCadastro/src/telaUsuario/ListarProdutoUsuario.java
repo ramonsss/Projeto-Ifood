@@ -4,7 +4,13 @@
  */
 package telaUsuario;
 
+import classes_de_conexao.Conexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import telaAdmin.ListarLojasCadastradas;
 
 /**
@@ -48,9 +54,9 @@ public class ListarProdutoUsuario extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         tfTempoDePreparo = new javax.swing.JTextField();
         btnAddCarrinho = new javax.swing.JButton();
+        tfIdProduto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 600));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 600));
         jPanel1.setLayout(null);
@@ -146,6 +152,10 @@ public class ListarProdutoUsuario extends javax.swing.JFrame {
             }
         });
 
+        tfIdProduto.setBackground(new java.awt.Color(153, 255, 255));
+        tfIdProduto.setForeground(new java.awt.Color(204, 0, 0));
+        tfIdProduto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -153,7 +163,9 @@ public class ListarProdutoUsuario extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(115, 115, 115)
                 .addComponent(lblFoto3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tfIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,9 +195,15 @@ public class ListarProdutoUsuario extends javax.swing.JFrame {
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(lblFoto3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(lblFoto3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(tfIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)))
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(jLabel21))
@@ -217,21 +235,17 @@ public class ListarProdutoUsuario extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(0, 30, Short.MAX_VALUE)
-                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 30, Short.MAX_VALUE)))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(0, 30, Short.MAX_VALUE)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 30, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(0, 50, Short.MAX_VALUE)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 50, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2);
@@ -243,13 +257,13 @@ public class ListarProdutoUsuario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 207, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 36, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -257,13 +271,13 @@ public class ListarProdutoUsuario extends javax.swing.JFrame {
 
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
         // TODO add your handling code here:
-            telaDoUsuario telaDoUsuarioFrame = new telaDoUsuario();
-            telaDoUsuarioFrame.setVisible(true);
-            telaDoUsuarioFrame.pack();
-            telaDoUsuarioFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
-            this.dispose();
+        telaDoUsuario telaDoUsuarioFrame = new telaDoUsuario();
+        telaDoUsuarioFrame.setVisible(true);
+        telaDoUsuarioFrame.pack();
+        telaDoUsuarioFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
+        this.dispose();
 
-            
+
     }//GEN-LAST:event_voltarActionPerformed
 
     private void listarProdutoBtnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarProdutoBtnProximoActionPerformed
@@ -272,6 +286,51 @@ public class ListarProdutoUsuario extends javax.swing.JFrame {
 
     private void btnAddCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCarrinhoActionPerformed
         // TODO add your handling code here:
+
+        try {
+
+            int id_produto = Integer.parseInt(tfIdProduto.getText());
+
+            Connection con = Conexao.faz_conexao();
+
+            String sql = "SELECT* FROM dados_produtos where id_produto = ?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, id_produto); // Define o ID como parâmetro
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            // ArrayList para armazenar os dados do produto
+        ArrayList<String> produtoInfo = new ArrayList<>();
+        
+        // Verificando se o produto foi encontrado
+        if (rs.next()) {
+            produtoInfo.add("ID: " + rs.getInt("id_produto"));
+            produtoInfo.add("Nome: " + rs.getString("nome_produto"));
+            produtoInfo.add("Preço: " + rs.getDouble("preco"));
+            produtoInfo.add("Descrição: " + rs.getString("descricao_produto"));
+            produtoInfo.add("Tempo de Preparo: " + rs.getString("tempo_preparo"));
+            
+            JOptionPane.showMessageDialog(null, "Produto adicionado ao carrinho!");
+            
+            
+            // Imprimindo no console para verificar
+            System.out.println("Dados do produto adicionados ao carrinho:");
+            for (String info : produtoInfo) {
+                System.out.println(info);
+            }
+            
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Produto não encontrado.");
+        }
+            
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+
     }//GEN-LAST:event_btnAddCarrinhoActionPerformed
 
     /**
@@ -325,13 +384,12 @@ public class ListarProdutoUsuario extends javax.swing.JFrame {
     private javax.swing.JButton listarProdutoBtnAnterior;
     private javax.swing.JButton listarProdutoBtnProximo;
     private javax.swing.JTextField tfDescricao;
+    private javax.swing.JLabel tfIdProduto;
     private javax.swing.JTextField tfNomeProduto;
     private javax.swing.JTextField tfPrecoDoProduto;
     private javax.swing.JTextField tfTempoDePreparo;
     private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables
-
-
 
     public JLabel getLblFoto3() {
         return lblFoto3;
@@ -348,8 +406,6 @@ public class ListarProdutoUsuario extends javax.swing.JFrame {
     public void setTfDescricao(javax.swing.JTextField tfDescricao) {
         this.tfDescricao = tfDescricao;
     }
-
-   
 
     public javax.swing.JTextField getTfNomeProduto() {
         return tfNomeProduto;
@@ -390,10 +446,13 @@ public class ListarProdutoUsuario extends javax.swing.JFrame {
     public void setListarProdutoBtnProximo(javax.swing.JButton listarProdutoBtnProximo) {
         this.listarProdutoBtnProximo = listarProdutoBtnProximo;
     }
-    
-    
-    
-    
-    
-    
+
+    public JLabel getTfIdProduto() {
+        return tfIdProduto;
+    }
+
+    public void setTfIdProduto(JLabel tfIdProduto) {
+        this.tfIdProduto = tfIdProduto;
+    }
+
 }

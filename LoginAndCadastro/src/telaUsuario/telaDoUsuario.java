@@ -94,6 +94,11 @@ public class telaDoUsuario extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(234, 29, 44));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/cesta-de-compras (1).png"))); // NOI18N
         jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout LeftLayout = new javax.swing.GroupLayout(Left);
         Left.setLayout(LeftLayout);
@@ -305,6 +310,7 @@ public class telaDoUsuario extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
+                listarProdutoFrame.getTfIdProduto().setText(rs.getString("id_produto")); 
                 listarProdutoFrame.getTfNomeProduto().setText(rs.getString("nome_produto"));
                 listarProdutoFrame.getTfPrecoDoProduto().setText(rs.getString("preco"));
                 listarProdutoFrame.getTfDescricao().setText(rs.getString("descricao_produto"));
@@ -379,12 +385,25 @@ public class telaDoUsuario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnListarProdutoActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        CarrinhoComprasFrame carrinhoComprasFrame = new CarrinhoComprasFrame();
+        carrinhoComprasFrame.setVisible(true);
+        carrinhoComprasFrame.pack();
+        carrinhoComprasFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
+        this.dispose();
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     
     
     
     private void atualizarInterface(ListarProdutoUsuario listarProdutoFrame, ResultSet rs) {
         try {
             // Atualiza os campos com os dados do ResultSet
+            listarProdutoFrame.getTfIdProduto().setText(rs.getString("id_produto"));
             listarProdutoFrame.getTfNomeProduto().setText(rs.getString("nome_produto"));
             listarProdutoFrame.getTfPrecoDoProduto().setText(rs.getString("preco"));
             listarProdutoFrame.getTfDescricao().setText(rs.getString("descricao_produto"));

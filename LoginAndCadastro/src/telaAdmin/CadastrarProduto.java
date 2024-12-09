@@ -4,6 +4,7 @@
  */
 package telaAdmin;
 
+import Classes.Produto;
 import classes_de_conexao.Conexao;
 import java.awt.Image;
 import java.io.FileInputStream;
@@ -230,7 +231,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tfTempoDePreparo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(tfNomeDoProduto)
-                    .addComponent(tfPreco)
+                    .addComponent(tfPreco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tfDescricao, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,6 +370,13 @@ public class CadastrarProduto extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.out.println(getIdDaLoja());
 
+        String nome = tfNomeDoProduto.getText();
+        double preco = Double.parseDouble(tfPreco.getText());
+        String descricao = tfDescricao.getText();
+        String tempoPreparo = tfTempoDePreparo.getText();
+        byte[] imagem = null;
+        
+        
         try {
 
             Connection con = Conexao.faz_conexao();
@@ -391,6 +399,12 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
             if (confirma == 1) {
                 JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+                
+                // Criando um novo objeto do tipo Produto para poder botar no meu arrayList e adicionar no carrinho
+                Produto produto = new Produto(nome, preco, descricao, tempoPreparo, imagem);
+                
+                atualizarCarrinhoNaInterface();
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Erro ao cadastrar o produto :(");
             }
@@ -413,6 +427,15 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnCadastrarProdutosActionPerformed
 
+    
+    private void atualizarCarrinhoNaInterface() {
+    
+        
+        
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */
