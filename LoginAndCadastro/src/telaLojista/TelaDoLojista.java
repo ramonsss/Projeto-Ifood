@@ -39,15 +39,31 @@ public class TelaDoLojista extends javax.swing.JFrame {
         this.verificacao = verificacao;
     }
     
+    private int idDoUsuario;
+
+    public int getIdDoUsuario() {
+        return idDoUsuario;
+    }
+
+    public void setIdDoUsuario(int idDoUsuario) {
+        this.idDoUsuario = idDoUsuario;
+    }
     
     
-    
+
     /**
      * Creates new form telaDoLojista
      */
     public TelaDoLojista() {
         initComponents();
-        getGetIdDoUsuarioLogado();
+    }
+
+    public TelaDoLojista(boolean verify, int idDoUsuario) {
+        initComponents();
+        this.verificacao = verify;
+        this.idDoUsuario = idDoUsuario;
+        System.out.println("Este eh o valor da verificação quando entro na tela do Lojista:" + verificacao);
+        System.out.println("Este eh o valor do id quando entro na tela do Lojista:" + idDoUsuario);
     }
 
     /**
@@ -216,17 +232,19 @@ public class TelaDoLojista extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMostrarNomeLojista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMostrarNomeLojista1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(78, 78, 78))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMostrarNomeLojista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMostrarNomeLojista1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(78, 78, 78))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,11 +302,12 @@ public class TelaDoLojista extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
-        System.out.println("Este eh o valor da verificação quando entro na tela do Lojista:" + isVerificacao());
-        
-        
-        CadastrarLoja cadastrarLojaFrame = new CadastrarLoja();
+
+        CadastrarLoja cadastrarLojaFrame = new CadastrarLoja(verificacao, idDoUsuario);
+
+        cadastrarLojaFrame.setVerify(verificacao);
+        cadastrarLojaFrame.setId(idDoUsuario);
+
         cadastrarLojaFrame.setVisible(true);
         cadastrarLojaFrame.pack();
         cadastrarLojaFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
@@ -304,7 +323,10 @@ public class TelaDoLojista extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
 
-        RemoverLojas RemoverLojas = new RemoverLojas();
+        RemoverLojas RemoverLojas = new RemoverLojas(verificacao);
+        RemoverLojas.setVerifica(verificacao);
+        
+        
         RemoverLojas.setVisible(true);
         RemoverLojas.pack();
         RemoverLojas.setLocationRelativeTo(null); // para abrir sempre no centro da tela
@@ -312,9 +334,6 @@ public class TelaDoLojista extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    
-    
-    
     public void listarLojas() {
 
         ListarLojasCadastradas listarLojasCadastradasFrame = new ListarLojasCadastradas();
@@ -323,13 +342,16 @@ public class TelaDoLojista extends javax.swing.JFrame {
 
             Connection con = Conexao.faz_conexao();
 //             
-            String sql = "SELECT * FROM dados_lojas";
+            String sql = "SELECT * FROM dados_lojas WHERE id_usuario = ?";
 
             PreparedStatement stmt = con.prepareStatement(
                     sql,
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY
             );
+            
+            stmt.setInt(1, idDoUsuario);
+            
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -434,10 +456,7 @@ public class TelaDoLojista extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-    
-    
-    
-    
+
     /**
      * @param args the command line arguments
      */

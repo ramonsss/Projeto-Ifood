@@ -28,11 +28,25 @@ import javax.swing.table.DefaultTableModel;
  */
 public class telaDoAdministrador extends javax.swing.JFrame {
 
+    private boolean verificacaoAdm;
+
+    public boolean isVerificacaoAdm() {
+        return verificacaoAdm;
+    }
+
+    public void setVerificacaoAdm(boolean verificacaoAdm) {
+        this.verificacaoAdm = verificacaoAdm;
+    }
+    
+    
+    
+    
     /**
      * Creates new form telaDoAdministrador
      */
     public telaDoAdministrador() {
         initComponents();
+        System.out.println("Verificação quando inicia adm: " + isVerificacaoAdm());
     }
 
     /**

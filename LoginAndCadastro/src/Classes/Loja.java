@@ -22,17 +22,19 @@ public class Loja {
     private String nome;
     private String localizacao;
     private String cnpj;
+    private int id_usuario;
     
     private FileInputStream fis;
     private int tamanho;
 
     // Construtor
-    public Loja(String nome, String localizacao, String cnpj, FileInputStream fis, int tamanho) {
+    public Loja(String nome, String localizacao, String cnpj, FileInputStream fis, int tamanho, int id_usuario) {
         this.nome = nome;
         this.localizacao = localizacao;
         this.cnpj = cnpj;
         this.fis = fis;
         this.tamanho = tamanho;
+        this.id_usuario = id_usuario;
     }
     
     
@@ -53,13 +55,14 @@ public class Loja {
                 cnpj = "";
             } else {
                 // Insere o novo cadastro
-                String sqlInserir = "INSERT INTO dados_lojas(nome, cnpj, localizacao, imagem, quantidadeProdutos) VALUES (?, ?, ?, ?, 1)";
+                String sqlInserir = "INSERT INTO dados_lojas(nome, cnpj, localizacao, imagem, quantidadeProdutos, id_usuario) VALUES (?, ?, ?, ?, 1, ?)";
                 PreparedStatement stmtInserir = con.prepareStatement(sqlInserir);
                 
                 stmtInserir.setString(1, nome);
                 stmtInserir.setString(2, cnpj);
                 stmtInserir.setString(3, localizacao);
                 stmtInserir.setBlob(4, fis, tamanho);
+                stmtInserir.setInt(5, id_usuario);
                 
                 int confirma = stmtInserir.executeUpdate();
                 

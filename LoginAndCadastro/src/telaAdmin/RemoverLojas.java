@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import telaLojista.TelaDoLojista;
 
 /**
  *
@@ -24,11 +25,28 @@ import javax.swing.JOptionPane;
  */
 public class RemoverLojas extends javax.swing.JFrame {
 
+    boolean verifica;
+
+    public boolean isVerifica() {
+        return verifica;
+    }
+
+    public void setVerifica(boolean verifica) {
+        this.verifica = verifica;
+    }
+   
+    
+    
     /**
      * Creates new form RemoverLojas
      */
     public RemoverLojas() {
         initComponents();
+    }
+    
+    public RemoverLojas(boolean verificacao) {
+        initComponents();
+        this.verifica = verificacao;
     }
 
     /**
@@ -303,11 +321,32 @@ public class RemoverLojas extends javax.swing.JFrame {
 
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
         // TODO add your handling code here:
-        telaDoAdministrador adminFrame = new telaDoAdministrador();
-        adminFrame.setVisible(true);
-        adminFrame.pack();
-        adminFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
-        this.dispose();
+        
+        if (verifica == true) {
+            telaDoAdministrador adminFrame = new telaDoAdministrador();
+            adminFrame.setVisible(true);
+            adminFrame.pack();
+            adminFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
+            this.dispose();
+            
+            System.out.println("eh adm");
+            
+            
+        } else if (verifica == false) {
+            
+            System.out.println("Eh lojista");
+            
+            TelaDoLojista lojistaFrame = new TelaDoLojista();
+            lojistaFrame.setVisible(true);
+            lojistaFrame.pack();
+            lojistaFrame.setLocationRelativeTo(null); // Para abrir sempre no centro da tela
+            this.dispose();
+        }
+        
+        
+        
+        
+        
     }//GEN-LAST:event_voltarActionPerformed
 
     private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirActionPerformed

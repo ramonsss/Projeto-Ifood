@@ -140,14 +140,20 @@ public class Acoes extends javax.swing.JFrame {
         }
 
     }
-    
-    public boolean verify = true;
+
+
+    private boolean verify = true;
+
+    public boolean isVerify() {
+        return verify;
+    }
+
+    public void setVerify(boolean verify) {
+        this.verify = verify;
+    }
 
     public void login() {
 
-        
-        
-        
         try {
 
             Connection con = Conexao.faz_conexao();
@@ -162,10 +168,8 @@ public class Acoes extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                
+
                 id = rs.getInt("id");
-                
-                
 
                 // Verifica se o login é do admin
                 String usuario = rs.getString("usuario");
@@ -177,20 +181,30 @@ public class Acoes extends javax.swing.JFrame {
 
                 // AQUI EH A VERIFICAÇÃO, SE O LOGIN POSTO FOR O DO ADMIN EH PARA ABRIR MINHA CLASSE ADMIN
                 if ("admin@admin.com".equals(email) && "admin123".equals(senha)) {
-                    verify = true;
+
+                    verify = false;
+
                     telaDoAdministrador adminFrame = new telaDoAdministrador();
+
+                    adminFrame.setVerificacaoAdm(verify);
+
                     adminFrame.setVisible(true);
                     adminFrame.pack();
                     adminFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
                 } // AQUI EH A VERIFICAÇÃO, SE O LOGIN POSTO FOR O DO LOJISTA EH PARA ABRIR MINHA CLASSE LOJISTA
                 else if (verificaLojista) {
-                    verify = false;
-                    
-                    TelaDoLojista lojistaFrame = new TelaDoLojista();
-                    lojistaFrame.setVerificacao(verify);
 
-                    // Passando o ID do lojista logado para a tela
-                    lojistaFrame.setGetIdDoUsuarioLogado(id);  // Passa o ID que foi obtido do banco
+                    verify = true;
+
+                    
+
+                    TelaDoLojista lojistaFrame = new TelaDoLojista(verify, id);
+                    
+                    
+                    lojistaFrame.setIdDoUsuario(id); 
+                    
+                    lojistaFrame.setVerificacao(verify);
+                    
 
                     // SQL para pegar o nome do lojista pelo ID
                     String sqlNome = "SELECT usuario FROM dados_senhas WHERE id = ?";
@@ -225,9 +239,8 @@ public class Acoes extends javax.swing.JFrame {
                     usuarioFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
                 }
 
-                System.out.println("Verify: " + verify);
                 
-                
+
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário/Senha incorreto");
             }
@@ -238,6 +251,8 @@ public class Acoes extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
+        
 
     }
 
@@ -281,10 +296,4 @@ public class Acoes extends javax.swing.JFrame {
         this.senha = senha;
     }
 
-    
-    
-    
-    
-    
-    
 }

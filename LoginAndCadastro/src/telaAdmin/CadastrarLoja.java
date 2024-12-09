@@ -26,28 +26,60 @@ import javax.swing.JTextField;
 import loginandcadastro.Login;
 import telaLojista.TelaDoLojista;
 
-
 /**
  *
  * @author Ramon Souza
  */
 public class CadastrarLoja extends javax.swing.JFrame {
 
+    private boolean verify;
+
+    public boolean isVerify() {
+        return verify;
+    }
+
+    public void setVerify(boolean verify) {
+        this.verify = verify;
+    }
+    
+    
+    
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
+    
+    
+    
     /**
      * Creates new form CadastrarLoja
      */
     public CadastrarLoja() {
         initComponents();
+        System.out.println("No construtor do Cadastrar Loja -------- " + isVerify());
     }
     
-    
+    public CadastrarLoja(boolean verificacao, int id) {
+        initComponents();
+        this.verify = verificacao;
+        this.id = id;
+        System.out.println("No construtor do Cadastrar Loja -------- " + isVerify());
+        System.out.println("Id No construtor do Cadastrar Loja -------- " + getId());
+    }
 
     // instanciar o objeto para o fluxo de bytes
     private FileInputStream fis;
-    
+
     //variavel global para armazenar tamanho da imagem (bytes)
-    private int tamanho;    
-    
+    private int tamanho;
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -284,79 +316,61 @@ public class CadastrarLoja extends javax.swing.JFrame {
     }//GEN-LAST:event_tfLocalizacaoActionPerformed
 
     
-    private boolean idUsuario = false;
 
-    public boolean getIdUsuario() {
-        return idUsuario;
-    }
 
-    public void setIdUsuario(boolean idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-    
-    
-    
-    
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
         // TODO add your handling code here:
-        
-        Acoes ac = new Acoes("", "", "", "", false);
-        System.out.println(ac.verify);
-        
-        try {
+
+        System.out.println("Verificação do Cadastrar Loja: " + isVerify());
+
+        if (isVerify() == false) {
+            telaDoAdministrador adminFrame = new telaDoAdministrador();
+            adminFrame.setVisible(true);
+            adminFrame.pack();
+            adminFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
+            this.dispose();
             
-            Connection con = Conexao.faz_conexao();
-            
-            String sql = "select * from dados_senhas";
+            System.out.println("eh adm");
             
             
+        } else if (isVerify() == true) {
             
+            System.out.println("Eh lojista");
             
-        } catch (Exception e) {
-            System.out.println(e);
+            TelaDoLojista lojistaFrame = new TelaDoLojista();
+            lojistaFrame.setVisible(true);
+            lojistaFrame.pack();
+            lojistaFrame.setLocationRelativeTo(null); // Para abrir sempre no centro da tela
+            this.dispose();
         }
-        
-        
-        
-        
-        telaDoAdministrador adminFrame = new telaDoAdministrador();
-        adminFrame.setVisible(true);
-        adminFrame.pack();
-        adminFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
-        this.dispose();
+
+
     }//GEN-LAST:event_voltarActionPerformed
 
     private void btnCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarActionPerformed
         // TODO add your handling code here:
-        
+
         carregarFoto();
-        
+
     }//GEN-LAST:event_btnCarregarActionPerformed
 
     private void btnCadastrarLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarLojaActionPerformed
         // TODO add your handling code here:
-         if(tfNomeDaLoja.getText().equals("") || tfCnpj.getText().equals("") || tfLocalizacao.getText().equals("")) {
+        if (tfNomeDaLoja.getText().equals("") || tfCnpj.getText().equals("") || tfLocalizacao.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos :)");
         } else {
-             
-             Loja loja = new Loja(tfNomeDaLoja.getText(), tfLocalizacao.getText(), tfCnpj.getText(), fis, tamanho);
-             loja.cadastrarLoja();
-             tfNomeDaLoja.setText("");
-             tfLocalizacao.setText("");
-             tfCnpj.setText("");
-             
-             lblFoto.setIcon(new ImageIcon(CadastrarLoja.class.getResource("/icon/camera.png")));
-             
+
+            Loja loja = new Loja(tfNomeDaLoja.getText(), tfLocalizacao.getText(), tfCnpj.getText(), fis, tamanho, getId());
+            loja.cadastrarLoja();
+            tfNomeDaLoja.setText("");
+            tfLocalizacao.setText("");
+            tfCnpj.setText("");
+
+            lblFoto.setIcon(new ImageIcon(CadastrarLoja.class.getResource("/icon/camera.png")));
+
         }
     }//GEN-LAST:event_btnCadastrarLojaActionPerformed
 
-    
-    
-    
-    
-    
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -391,14 +405,14 @@ public class CadastrarLoja extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void carregarFoto() {
-        
+
         JFileChooser jfc = new JFileChooser();
         jfc.setDialogTitle("AINNN SELECIONA A FOTINHANN");
         jfc.setFileFilter(new FileNameExtensionFilter("Arquivo de imagens(*.PNG,*.JPG,*.JPEG)", "png", "jpg", "jpeg"));
         int resultado = jfc.showOpenDialog(this);
-        if(resultado == JFileChooser.APPROVE_OPTION) {
+        if (resultado == JFileChooser.APPROVE_OPTION) {
             // para armazenar o arquivo na variavel tamanho
             try {
                 fis = new FileInputStream(jfc.getSelectedFile());
@@ -431,9 +445,7 @@ public class CadastrarLoja extends javax.swing.JFrame {
     private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables
 
-
-
-public JTextField getTfNomeDaLoja() {
+    public JTextField getTfNomeDaLoja() {
         return tfNomeDaLoja;
     }
 
@@ -476,6 +488,5 @@ public JTextField getTfNomeDaLoja() {
     public void setTamanho(int tamanho) {
         this.tamanho = tamanho;
     }
-
 
 }
