@@ -21,9 +21,8 @@ import telaAdmin.ListarLojasCadastradas;
  * @author Ramon Souza
  */
 public class ListarProdutoUsuario extends javax.swing.JFrame {
-    
-    private Map<Integer, ArrayList<String>> carrinhosPorLoja = new HashMap<>();
 
+    private Map<Integer, ArrayList<String>> carrinhosPorLoja = new HashMap<>();
 
     int idDaLojaPfvFunciona;
 
@@ -36,8 +35,6 @@ public class ListarProdutoUsuario extends javax.swing.JFrame {
     public void setProdutoInfo(ArrayList<String> produtoInfo) {
         this.produtoInfo = produtoInfo;
     }
-    
-    
 
     /**
      * Creates new form ListarProdutoUsuario
@@ -51,7 +48,6 @@ public class ListarProdutoUsuario extends javax.swing.JFrame {
         this.idDaLojaPfvFunciona = idDaLojaPfvFunciona;
         this.produtoInfo = produtoInfo;
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -294,7 +290,7 @@ public class ListarProdutoUsuario extends javax.swing.JFrame {
         Acoes ac = new Acoes();
 
         telaDoUsuario telaDoUsuarioFrame = new telaDoUsuario(produtoInfo);
-        
+
         System.out.println("Dados do produto no botao voltar do ListarProduto: ");
         for (String info : produtoInfo) {
             System.out.println(info);
@@ -335,15 +331,15 @@ public class ListarProdutoUsuario extends javax.swing.JFrame {
 
             ResultSet rs = stmt.executeQuery();
 
-            
-
             // Adicionar o produto ao carrinho da loja
             if (rs.next()) {
-                produtoInfo.add("ID: " + rs.getInt("id_produto"));
-                produtoInfo.add("Nome: " + rs.getString("nome_produto"));
-                produtoInfo.add("Preço: " + rs.getDouble("preco"));
-                produtoInfo.add("Descrição: " + rs.getString("descricao_produto"));
-                produtoInfo.add("Tempo de Preparo: " + rs.getString("tempo_preparo"));
+                String produto
+                        = "Nome: " + rs.getString("nome_produto") + "\n"
+                        + "Descrição: " + rs.getString("descricao_produto") + "\n"
+                        + "Tempo de Preparo: " + rs.getString("tempo_preparo") + "\n"
+                        + "Preço: " + rs.getDouble("preco");
+
+                produtoInfo.add(produto);
 
                 JOptionPane.showMessageDialog(null, "Produto adicionado ao carrinho!");
 

@@ -4,7 +4,10 @@
  */
 package telaUsuario;
 
+import Classes.Acoes;
 import java.util.ArrayList;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 
 /**
@@ -25,6 +28,7 @@ public class CarrinhoComprasFrame extends javax.swing.JFrame {
     public CarrinhoComprasFrame(ArrayList<String> produtoInfo) {
         initComponents();
         this.produtoInfo = produtoInfo;
+        adicionarProdutosAoPanel(); // Adiciona os produtos ao painel
     }
 
     /**
@@ -36,35 +40,110 @@ public class CarrinhoComprasFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        Left = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        voltar = new javax.swing.JButton();
+        panelRight = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jPanel2.setPreferredSize(new java.awt.Dimension(800, 600));
+        jPanel2.setLayout(null);
+
+        Left.setBackground(new java.awt.Color(234, 29, 44));
+        Left.setPreferredSize(new java.awt.Dimension(400, 600));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ramon Souza\\Documents\\NetBeansProjects\\LoginAndCadastro\\src\\Icon\\logo250x250-removebg-preview.png")); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel3.setText("copyright © RSFOOD Todos os direitos reservados");
+
+        voltar.setForeground(new java.awt.Color(234, 29, 44));
+        voltar.setText("Voltar");
+        voltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                voltarActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout LeftLayout = new javax.swing.GroupLayout(Left);
+        Left.setLayout(LeftLayout);
+        LeftLayout.setHorizontalGroup(
+            LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LeftLayout.createSequentialGroup()
+                .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(LeftLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(voltar))
+                    .addGroup(LeftLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(LeftLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel2)))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        LeftLayout.setVerticalGroup(
+            LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LeftLayout.createSequentialGroup()
+                .addContainerGap(128, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(72, 72, 72)
+                .addComponent(jLabel3)
+                .addGap(46, 46, 46)
+                .addComponent(voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73))
+        );
+
+        jPanel2.add(Left);
+        Left.setBounds(0, 0, 340, 620);
+
+        panelRight.setBackground(new java.awt.Color(255, 255, 255));
+
+        jButton2.setBackground(new java.awt.Color(51, 153, 0));
+        jButton2.setText("Comprar");
+
+        javax.swing.GroupLayout panelRightLayout = new javax.swing.GroupLayout(panelRight);
+        panelRight.setLayout(panelRightLayout);
+        panelRightLayout.setHorizontalGroup(
+            panelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRightLayout.createSequentialGroup()
+                .addContainerGap(92, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68))
+        );
+        panelRightLayout.setVerticalGroup(
+            panelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRightLayout.createSequentialGroup()
+                .addContainerGap(553, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(24, 24, 24))
+        );
+
+        jPanel2.add(panelRight);
+        panelRight.setBounds(340, 0, 560, 600);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(381, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(344, 344, 344))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(jButton1)
-                .addContainerGap(451, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -72,28 +151,37 @@ public class CarrinhoComprasFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
         // TODO add your handling code here:
 
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\nAqui eh na classe Carrinho Compras E O TESTE FINAL SE TUDO FUNCIONOU:\n");
+        Acoes ac = new Acoes();
+
+        telaDoUsuario telaDoUsuarioFrame = new telaDoUsuario(produtoInfo);
+
+        System.out.println("Dados do produto no botao voltar do ListarProduto: ");
         for (String info : produtoInfo) {
             System.out.println(info);
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+        ac.listarLojas(telaDoUsuarioFrame);
+
+        telaDoUsuarioFrame.setVisible(true);
+        telaDoUsuarioFrame.pack();
+        telaDoUsuarioFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
+        this.dispose();
+
+    }//GEN-LAST:event_voltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,8 +218,127 @@ public class CarrinhoComprasFrame extends javax.swing.JFrame {
         });
     }
 
+    private void adicionarProdutosAoPanel() {
+        // Definir o layout do panelRight para BoxLayout com orientação vertical
+        panelRight.setLayout(new BoxLayout(panelRight, BoxLayout.Y_AXIS));
+
+        // Variáveis para acumular o tempo total
+        int totalHoras = 0;
+        int totalMinutos = 0;
+        double totalPreco = 0.0;
+
+        for (int i = 0; i < produtoInfo.size(); i++) {
+            String produto = produtoInfo.get(i);
+
+            // Criar o JLabel para "Produto X" com negrito, maiúsculo e cor específica
+            String tituloProduto = "Produto " + (i + 1) + ":";
+            JLabel labelTituloProduto = new JLabel(tituloProduto.toUpperCase());  // Tudo em maiúsculo
+            labelTituloProduto.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14)); // Negrito
+            labelTituloProduto.setForeground(new java.awt.Color(234, 29, 44)); // Cor [234, 29, 44]
+
+            // Adiciona o título do produto ao panelRight
+            panelRight.add(labelTituloProduto);
+
+            // Criar o JLabel para as informações do produto
+            String produtoInformacao = produto.replace("\n", "<br>");  // Substitui as quebras de linha para <br> (HTML)
+
+            // Alterar o preço para a cor [51,153,0]
+            produtoInformacao = produtoInformacao.replaceAll("Preço: (\\d+\\.\\d+)",
+                    "<font color='#339900'>Preço: $1</font>");  // Regex para capturar e alterar a cor do preço
+
+            JLabel labelProduto = new JLabel("<html>" + produtoInformacao + "</html>");
+
+            // Estilize o JLabel com a fonte padrão
+            labelProduto.setFont(new java.awt.Font("Segoe UI", 0, 14));
+            labelProduto.setForeground(new java.awt.Color(0, 0, 0)); // Cor padrão para o restante do texto
+
+            // Adiciona as informações do produto ao panelRight
+            panelRight.add(labelProduto);
+
+            // Adiciona um espaço extra após cada produto
+            panelRight.add(Box.createVerticalStrut(10));  // Ajuste o espaçamento conforme necessário
+
+            // Processa o tempo de preparo para somar
+            String tempoDePreparo = produto.split("Tempo de Preparo: ")[1].split("\n")[0].trim(); // Extrai o tempo de preparo da string
+
+            // Exemplo de tempo de preparo no formato "XXhYY"
+            String[] partesTempo = tempoDePreparo.split("h");
+
+            // Extração das horas e minutos
+            int horas = Integer.parseInt(partesTempo[0]);
+            int minutos = Integer.parseInt(partesTempo[1].replace("m", ""));
+
+            // Soma do tempo de preparo
+            totalHoras += horas;
+            totalMinutos += minutos;
+
+            // Encontrar o índice da string "Preço:" e extrair o valor após ela
+            int precoIndex = produto.indexOf("Preço:") + 7; // O comprimento da palavra "Preço: " é 7
+
+            if (precoIndex != -1) { // Verifica se encontrou "Preço:"
+                String precoString = produto.substring(precoIndex).trim(); // Extrai a parte do preço da string
+
+                // Tenta converter o preço para double e soma ao total
+                try {
+                    // Converte o preço para double e soma ao total
+                    double preco = Double.parseDouble(precoString);
+                    totalPreco += preco;  // Soma o preço ao total
+                } catch (NumberFormatException e) {
+                    System.out.println("Erro ao converter o preço para número: " + precoString);
+                }
+            }
+        }
+
+        // Adiciona 15 minutos extras ao tempo total de espera
+        totalMinutos += 15;
+
+        // Verifica se os minutos ultrapassaram 60 e ajusta as horas e minutos
+        if (totalMinutos >= 60) {
+            totalHoras += totalMinutos / 60;
+            totalMinutos = totalMinutos % 60;
+        }
+
+        // Exibe o tempo total de espera no console
+        System.out.println("Tempo total de espera: " + totalHoras + "h " + totalMinutos + "m");
+
+        // Exibe o total no console
+        System.out.println("Total dos preços: R$ " + totalPreco);
+
+        
+
+// Exibir o tempo total de espera
+        JLabel labelTempoEspera = new JLabel("TEMPO TOTAL DE ESPERA: " + totalHoras + "h " + totalMinutos + "m");
+        labelTempoEspera.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 16)); // Negrito
+        labelTempoEspera.setForeground(new java.awt.Color(51, 153, 255)); // Cor [234, 29, 44]
+        
+        // Exibir o total no JLabel com a cor [234, 29, 44]
+        JLabel labelTotal = new JLabel("TOTAL DOS PREÇOS: R$ " + String.format("%.2f", totalPreco));
+        labelTotal.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 24)); // Negrito
+        labelTotal.setForeground(new java.awt.Color(51, 0, 51)); // Cor [234, 29, 44]
+
+// Adicionar um espaçamento maior entre os JLabels
+        panelRight.add(labelTotal);  // Adiciona o label do total de preços
+        panelRight.add(Box.createVerticalStrut(35));  // Espaçamento entre o total e o tempo de espera (ajuste o valor 20 conforme necessário)
+        panelRight.add(labelTempoEspera);  // Adiciona o label do tempo total de espera
+
+        // Adiciona os JLabels ao painel
+        panelRight.add(labelTotal);
+
+        // Atualiza o layout do painel
+        panelRight.revalidate();
+        panelRight.repaint();
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Left;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel panelRight;
+    private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables
 }
