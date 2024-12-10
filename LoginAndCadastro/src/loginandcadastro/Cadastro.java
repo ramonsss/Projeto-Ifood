@@ -52,6 +52,8 @@ public class Cadastro extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(234, 29, 44));
         jPanel2.setPreferredSize(new java.awt.Dimension(400, 500));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ramon Souza\\Documents\\NetBeansProjects\\LoginAndCadastro\\src\\Icon\\logo250x250-removebg-preview.png")); // NOI18N
+
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel2.setText("copyright © RSFOOD Todos os direitos reservados");
 

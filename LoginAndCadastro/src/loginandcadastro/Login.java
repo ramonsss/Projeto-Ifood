@@ -9,6 +9,7 @@ import classes_de_conexao.Conexao;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import telaAdmin.CadastrarLoja;
 import telaAdmin.telaDoAdministrador;
@@ -19,15 +20,21 @@ import telaUsuario.telaDoUsuario;
  *
  * @author Ramon Souza
  */
-
 public class Login extends javax.swing.JFrame {
-    
 
+    ArrayList<String> produtoInfo = new ArrayList<>();
+    
+    
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
+    }
+    
+    public Login(ArrayList<String> produtoInfo) {
+        initComponents();
+        this.produtoInfo = produtoInfo;
     }
 
     /**
@@ -65,7 +72,7 @@ public class Login extends javax.swing.JFrame {
         Right.setBackground(new java.awt.Color(234, 29, 44));
         Right.setPreferredSize(new java.awt.Dimension(400, 500));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/logo250x250-removebg-preview.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ramon Souza\\Documents\\NetBeansProjects\\LoginAndCadastro\\src\\Icon\\logo250x250-removebg-preview.png")); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel5.setText("copyright © RSFOOD Todos os direitos reservados");
@@ -167,14 +174,17 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(pfSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
-                            .addComponent(tfUsuario)
-                            .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)
                             .addGroup(LeftLayout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)))))
-                .addContainerGap(198, Short.MAX_VALUE))
+                                .addComponent(jButton2))
+                            .addComponent(tfUsuario)
+                            .addGroup(LeftLayout.createSequentialGroup()
+                                .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton1))
+                                .addGap(42, 42, 42)))))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         LeftLayout.setVerticalGroup(
             LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,15 +203,15 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
-                .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(90, 90, 90))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         jPanel1.add(Left);
-        Left.setBounds(400, -10, 565, 595);
+        Left.setBounds(400, 0, 400, 500);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -221,15 +231,6 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        LoginEsqueceuASenha redefirFrame = new LoginEsqueceuASenha();
-        redefirFrame.setVisible(true);
-        redefirFrame.pack();
-        redefirFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         Cadastro CadastroFrame = new Cadastro();
@@ -239,16 +240,26 @@ public class Login extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // TODO add your handling code here:
 
         Acoes ac = new Acoes(tfUsuario.getText(), "", "", pfSenha.getText(), true);
         ac.login();
-     
+
         this.dispose(); // Fecha a minha tela de login
+
 
     }//GEN-LAST:event_btnEntrarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        LoginEsqueceuASenha redefirFrame = new LoginEsqueceuASenha();
+        redefirFrame.setVisible(true);
+        redefirFrame.pack();
+        redefirFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private int usuarioId;
 
@@ -259,8 +270,6 @@ public class Login extends javax.swing.JFrame {
     public void setUsuarioId(int usuarioId) {
         this.usuarioId = usuarioId;
     }
-    
-    
 
     /**
      * @param args the command line arguments
