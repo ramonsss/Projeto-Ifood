@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,7 +49,7 @@ public class CarrinhoComprasFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         voltar = new javax.swing.JButton();
         panelRight = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnComprar = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -110,8 +111,13 @@ public class CarrinhoComprasFrame extends javax.swing.JFrame {
 
         panelRight.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton2.setBackground(new java.awt.Color(51, 153, 0));
-        jButton2.setText("Comprar");
+        btnComprar.setBackground(new java.awt.Color(51, 153, 0));
+        btnComprar.setText("Comprar");
+        btnComprar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelRightLayout = new javax.swing.GroupLayout(panelRight);
         panelRight.setLayout(panelRightLayout);
@@ -119,14 +125,14 @@ public class CarrinhoComprasFrame extends javax.swing.JFrame {
             panelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRightLayout.createSequentialGroup()
                 .addContainerGap(92, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(68, 68, 68))
         );
         panelRightLayout.setVerticalGroup(
             panelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRightLayout.createSequentialGroup()
                 .addContainerGap(553, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(btnComprar)
                 .addGap(24, 24, 24))
         );
 
@@ -183,6 +189,60 @@ public class CarrinhoComprasFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_voltarActionPerformed
 
+    private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
+        // TODO add your handling code here:
+
+        // Calcula o tempo médio diminuindo 15 minutos
+        int totalHoras = 0;
+        int totalMinutos = 0;
+
+        for (String produto : produtoInfo) {
+            // Processa o tempo de preparo para somar
+            String tempoDePreparo = produto.split("Tempo de Preparo: ")[1].split("\n")[0].trim();
+
+            // Exemplo de tempo de preparo no formato "XXhYYm"
+            String[] partesTempo = tempoDePreparo.split("h");
+
+            // Extração das horas e minutos
+            int horas = Integer.parseInt(partesTempo[0]);
+            int minutos = Integer.parseInt(partesTempo[1].replace("m", ""));
+
+            totalHoras += horas;
+            totalMinutos += minutos;
+        }
+
+        // Soma o total de minutos e calcula o tempo médio
+        int tempoTotalEmMinutos = totalHoras * 60 + totalMinutos;
+        int quantidadeProdutos = produtoInfo.size();
+        int tempoMedioEmMinutos = quantidadeProdutos > 0 ? tempoTotalEmMinutos / quantidadeProdutos : 0;
+
+        // Reduz 15 minutos do tempo médio
+        tempoMedioEmMinutos = Math.max(0, tempoMedioEmMinutos - 15);
+
+        // Converte o tempo médio ajustado para horas e minutos
+        int tempoMedioHoras = tempoMedioEmMinutos / 60;
+        int tempoMedioMinutos = tempoMedioEmMinutos % 60;
+
+        // Mensagem de confirmação
+        String mensagem = String.format(
+                "<html>Obrigado pela confiança!<br>Seu pedido estará pronto em: %dh %dm.<br><br>Será entregue em mais ou menos 15 minutos.</html>",
+                tempoMedioHoras, tempoMedioMinutos
+        );
+
+        // Exibe o JOptionPane com a mensagem
+        JOptionPane.showMessageDialog(null, mensagem, "Compra Confirmada", JOptionPane.INFORMATION_MESSAGE);
+
+        // Limpa o carrinho (ArrayList)
+        produtoInfo.clear();
+
+        // Atualiza o painel para refletir as mudanças
+        panelRight.removeAll();
+        panelRight.revalidate();
+        panelRight.repaint();
+
+
+    }//GEN-LAST:event_btnComprarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -218,6 +278,7 @@ public class CarrinhoComprasFrame extends javax.swing.JFrame {
         });
     }
 
+    // Atualiza o método para calcular o tempo médio de espera
     private void adicionarProdutosAoPanel() {
         // Definir o layout do panelRight para BoxLayout com orientação vertical
         panelRight.setLayout(new BoxLayout(panelRight, BoxLayout.Y_AXIS));
@@ -261,7 +322,7 @@ public class CarrinhoComprasFrame extends javax.swing.JFrame {
             // Processa o tempo de preparo para somar
             String tempoDePreparo = produto.split("Tempo de Preparo: ")[1].split("\n")[0].trim(); // Extrai o tempo de preparo da string
 
-            // Exemplo de tempo de preparo no formato "XXhYY"
+            // Exemplo de tempo de preparo no formato "XXhYYm"
             String[] partesTempo = tempoDePreparo.split("h");
 
             // Extração das horas e minutos
@@ -280,7 +341,6 @@ public class CarrinhoComprasFrame extends javax.swing.JFrame {
 
                 // Tenta converter o preço para double e soma ao total
                 try {
-                    // Converte o preço para double e soma ao total
                     double preco = Double.parseDouble(precoString);
                     totalPreco += preco;  // Soma o preço ao total
                 } catch (NumberFormatException e) {
@@ -292,37 +352,37 @@ public class CarrinhoComprasFrame extends javax.swing.JFrame {
         // Adiciona 15 minutos extras ao tempo total de espera
         totalMinutos += 15;
 
-        // Verifica se os minutos ultrapassaram 60 e ajusta as horas e minutos
-        if (totalMinutos >= 60) {
-            totalHoras += totalMinutos / 60;
-            totalMinutos = totalMinutos % 60;
-        }
+        // Converte o tempo total para minutos
+        int tempoTotalEmMinutos = totalHoras * 60 + totalMinutos;
 
-        // Exibe o tempo total de espera no console
-        System.out.println("Tempo total de espera: " + totalHoras + "h " + totalMinutos + "m");
+        // Calcula o tempo médio por produto
+        int quantidadeProdutos = produtoInfo.size();
+        int tempoMedioEmMinutos = quantidadeProdutos > 0 ? tempoTotalEmMinutos / quantidadeProdutos : 0;
+
+        // Converte o tempo médio de minutos para horas e minutos
+        int tempoMedioHoras = tempoMedioEmMinutos / 60;
+        int tempoMedioMinutos = tempoMedioEmMinutos % 60;
+
+        // Exibe o tempo médio de espera no console
+        System.out.println("Tempo médio de espera: " + tempoMedioHoras + "h " + tempoMedioMinutos + "m");
 
         // Exibe o total no console
         System.out.println("Total dos preços: R$ " + totalPreco);
 
-        
-
-// Exibir o tempo total de espera
-        JLabel labelTempoEspera = new JLabel("TEMPO TOTAL DE ESPERA: " + totalHoras + "h " + totalMinutos + "m");
+        // Exibir o tempo médio de espera
+        JLabel labelTempoEspera = new JLabel("TEMPO MÉDIO DE ESPERA: " + tempoMedioHoras + "h " + tempoMedioMinutos + "m");
         labelTempoEspera.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 16)); // Negrito
-        labelTempoEspera.setForeground(new java.awt.Color(51, 153, 255)); // Cor [234, 29, 44]
-        
+        labelTempoEspera.setForeground(new java.awt.Color(51, 153, 255));
+
         // Exibir o total no JLabel com a cor [234, 29, 44]
         JLabel labelTotal = new JLabel("TOTAL DOS PREÇOS: R$ " + String.format("%.2f", totalPreco));
         labelTotal.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 24)); // Negrito
-        labelTotal.setForeground(new java.awt.Color(51, 0, 51)); // Cor [234, 29, 44]
+        labelTotal.setForeground(new java.awt.Color(51, 0, 51));
 
-// Adicionar um espaçamento maior entre os JLabels
-        panelRight.add(labelTotal);  // Adiciona o label do total de preços
-        panelRight.add(Box.createVerticalStrut(35));  // Espaçamento entre o total e o tempo de espera (ajuste o valor 20 conforme necessário)
-        panelRight.add(labelTempoEspera);  // Adiciona o label do tempo total de espera
-
-        // Adiciona os JLabels ao painel
+        // Adicionar os JLabels ao painel
         panelRight.add(labelTotal);
+        panelRight.add(Box.createVerticalStrut(35));  // Espaçamento entre os elementos
+        panelRight.add(labelTempoEspera);
 
         // Atualiza o layout do painel
         panelRight.revalidate();
@@ -332,8 +392,8 @@ public class CarrinhoComprasFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Left;
+    private javax.swing.JButton btnComprar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

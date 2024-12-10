@@ -4,6 +4,7 @@
  */
 package Classes;
 
+import Classes.Produto.Produto;
 import java.util.ArrayList;
 
 /**
