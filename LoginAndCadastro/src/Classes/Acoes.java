@@ -36,6 +36,10 @@ public class Acoes extends javax.swing.JFrame {
     private String senha;
     private boolean valorBooleano;
 
+   
+    public Acoes() {}
+    
+    
     public Acoes(int id) {
 
         this.id = id;

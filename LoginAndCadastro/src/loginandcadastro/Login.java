@@ -9,6 +9,7 @@ import classes_de_conexao.Conexao;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import telaAdmin.CadastrarLoja;
 import telaAdmin.telaDoAdministrador;
@@ -21,11 +22,19 @@ import telaUsuario.telaDoUsuario;
  */
 public class Login extends javax.swing.JFrame {
 
+    ArrayList<String> produtoInfo = new ArrayList<>();
+    
+    
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
+    }
+    
+    public Login(ArrayList<String> produtoInfo) {
+        initComponents();
+        this.produtoInfo = produtoInfo;
     }
 
     /**
