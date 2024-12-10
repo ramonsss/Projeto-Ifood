@@ -4,6 +4,9 @@
  */
 package Classes;
 
+import Classes.Usuario.Cliente;
+import Classes.Usuario.DonoLoja;
+import Classes.Usuario.Usuario;
 import classes_de_conexao.Conexao;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -36,10 +39,9 @@ public class Acoes extends javax.swing.JFrame {
     private String senha;
     private boolean valorBooleano;
 
-   
-    public Acoes() {}
-    
-    
+    public Acoes() {
+    }
+
     public Acoes(int id) {
 
         this.id = id;
@@ -92,6 +94,15 @@ public class Acoes extends javax.swing.JFrame {
                 stmtInserir.execute();
 
                 JOptionPane.showMessageDialog(null, "Você foi cadastrado com sucesso! Volte para o Login");
+
+                // Cria um objeto Cliente ou DonoLoja e adiciona ao ArrayList
+                Usuario novoUsuario;
+                if (valorBooleano) {
+                    novoUsuario = new DonoLoja(usuario, senha, email, cep, valorBooleano);
+                } else {
+                    novoUsuario = new Cliente(usuario, senha, email, cep, valorBooleano);
+                }
+                Usuario.adicionarUsuarioAoArray(novoUsuario);
 
                 // Limpa os campos
                 usuario = "";
@@ -185,10 +196,14 @@ public class Acoes extends javax.swing.JFrame {
                 // Verifica se o login é do admin
                 String usuario = rs.getString("usuario");
                 String email = rs.getString("email");
-                String senha = rs.getString("senha");
+                String senha = rs.getString("senha");   
 
                 // Verifica se o login é do Lojista
                 boolean verificaLojista = rs.getBoolean("isDonoVer");
+                
+                
+                Usuario usuarioLogado = null;
+                
 
                 // AQUI EH A VERIFICAÇÃO, SE O LOGIN POSTO FOR O DO ADMIN EH PARA ABRIR MINHA CLASSE ADMIN
                 if ("admin@admin.com".equals(email) && "admin123".equals(senha)) {
@@ -203,8 +218,13 @@ public class Acoes extends javax.swing.JFrame {
                     adminFrame.pack();
                     adminFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
                 } // AQUI EH A VERIFICAÇÃO, SE O LOGIN POSTO FOR O DO LOJISTA EH PARA ABRIR MINHA CLASSE LOJISTA
+                
+                    
+                
                 else if (verificaLojista) {
 
+                    usuarioLogado = new DonoLoja(usuario, senha, email, rs.getString("cep"), verificaLojista);
+                    
                     verify = true;
 
                     TelaDoLojista lojistaFrame = new TelaDoLojista(verify, id);
@@ -238,6 +258,10 @@ public class Acoes extends javax.swing.JFrame {
                     lojistaFrame.setLocationRelativeTo(null); // Para abrir sempre no centro da tela
                 } // AQUI EH A VERIFICAÇÃO, SE O LOGIN POSTO FOR O DO USUARIO EH PARA ABRIR MINHA CLASSE USUARIO
                 else {
+                    
+                    
+                    usuarioLogado = new Cliente(usuario, senha, email, rs.getString("cep"), verificaLojista);
+                    
                     telaDoUsuario usuarioFrame = new telaDoUsuario();
 
                     listarLojas(usuarioFrame);
@@ -250,6 +274,7 @@ public class Acoes extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário/Senha incorreto");
             }
+            
 
         } catch (SQLException e) {
             e.printStackTrace();

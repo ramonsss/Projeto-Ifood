@@ -4,6 +4,8 @@
  */
 package Classes.Usuario;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Ramon Souza
@@ -16,20 +18,25 @@ public class Usuario {
     private String cep;
     private boolean isDonoVer;
 
+    // ArrayList estático para armazenar os usuários cadastrados
+    private static ArrayList<Usuario> usuariosCadastrados = new ArrayList<>();
+
     public Usuario(String nome, String senha, String email, String cep, boolean isDonoVer) {
-        this.nome = nome;
-        this.senha = senha;
-        this.email = email;
-        this.cep = cep;
+        setNome(nome);
+        setSenha(senha);
+        setEmail(email);
+        setCep(cep);
         this.isDonoVer = isDonoVer;
-    }    
-    
+    }
+
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        if (nome.length() > 5) {
+            this.nome = nome;
+        }
     }
 
     public String getSenha() {
@@ -37,7 +44,9 @@ public class Usuario {
     }
 
     public void setSenha(String senha) {
-        this.senha = senha;
+        if (senha.length() > 5) {
+            this.senha = senha;
+        }
     }
 
     public String getEmail() {
@@ -45,7 +54,9 @@ public class Usuario {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        if(email.length() > 5) {
+            this.email = email;
+        }
     }
 
     public String getCep() {
@@ -53,7 +64,9 @@ public class Usuario {
     }
 
     public void setCep(String cep) {
-        this.cep = cep;
+        if(cep.length() > 5) {
+            this.cep = cep;
+        }
     }
 
     public boolean isIsDonoVer() {
@@ -63,7 +76,19 @@ public class Usuario {
     public void setIsDonoVer(boolean isDonoVer) {
         this.isDonoVer = isDonoVer;
     }
-    
-        
+
+    // Método para adicionar usuário ao ArrayList
+    public static void adicionarUsuarioAoArray(Usuario usuario) {
+        usuariosCadastrados.add(usuario);
+        System.out.println("Usuário adicionado ao ArrayList: " + usuario.getNome());
+    }
+
+    // Método para listar usuários cadastrados
+    public static void listarUsuarios() {
+        System.out.println("Lista de usuários cadastrados:");
+        for (Usuario usuario : usuariosCadastrados) {
+            System.out.println("Nome: " + usuario.getNome() + ", Email: " + usuario.getEmail());
+        }
+    }
 
 }
