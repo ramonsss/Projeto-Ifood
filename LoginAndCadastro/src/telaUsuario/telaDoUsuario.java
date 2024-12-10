@@ -32,20 +32,11 @@ import telaAdmin.ListarProdutosCadastrados;
  */
 public class telaDoUsuario extends javax.swing.JFrame {
 
-    ArrayList<String> produtoInfo = new ArrayList<>();
-    
-
-    /*
+    /**
      * Creates new form telaDoUsuario
      */
-    
     public telaDoUsuario() {
         initComponents();
-    }
-
-    public telaDoUsuario(ArrayList<String> produtoInfo) {
-        initComponents();
-        this.produtoInfo = produtoInfo;
     }
 
     /**
@@ -292,10 +283,15 @@ public class telaDoUsuario extends javax.swing.JFrame {
 
     private void btnListarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarProdutoActionPerformed
         // TODO add your handling code here:
-
-        ListarProdutoUsuario listarProdutoFrame = new ListarProdutoUsuario(Integer.parseInt(tfIdLoja.getText()));
-
+        
+        
+        ListarProdutoUsuario listarProdutoFrame = new ListarProdutoUsuario();
+        
+        
         CadastrarProduto cadastrarProduto = new CadastrarProduto();
+        
+        
+
 
         try {
 
@@ -314,7 +310,7 @@ public class telaDoUsuario extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                listarProdutoFrame.getTfIdProduto().setText(rs.getString("id_produto"));
+                listarProdutoFrame.getTfIdProduto().setText(rs.getString("id_produto")); 
                 listarProdutoFrame.getTfNomeProduto().setText(rs.getString("nome_produto"));
                 listarProdutoFrame.getTfPrecoDoProduto().setText(rs.getString("preco"));
                 listarProdutoFrame.getTfDescricao().setText(rs.getString("descricao_produto"));
@@ -383,28 +379,27 @@ public class telaDoUsuario extends javax.swing.JFrame {
         listarProdutoFrame.pack();
         listarProdutoFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
         this.dispose();
-
-
+        
+        
+        
+        
     }//GEN-LAST:event_btnListarProdutoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
-        CarrinhoComprasFrame carrinhoComprasFrame = new CarrinhoComprasFrame(produtoInfo);
-
-        System.out.println("Dados do produto no icone de carrinho:");
-        for (String info : produtoInfo) {
-            System.out.println(info);
-        }
-
+        
+        CarrinhoComprasFrame carrinhoComprasFrame = new CarrinhoComprasFrame();
         carrinhoComprasFrame.setVisible(true);
         carrinhoComprasFrame.pack();
         carrinhoComprasFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
         this.dispose();
-
-
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    
+    
+    
     private void atualizarInterface(ListarProdutoUsuario listarProdutoFrame, ResultSet rs) {
         try {
             // Atualiza os campos com os dados do ResultSet
@@ -435,7 +430,11 @@ public class telaDoUsuario extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-
+    
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -491,7 +490,9 @@ public class telaDoUsuario extends javax.swing.JFrame {
     private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables
 
-    // Getter e Setter para tfLocalizacaoLoja
+
+    
+      // Getter e Setter para tfLocalizacaoLoja
     public javax.swing.JTextField getTfLocalizacaoLoja() {
         return tfLocalizacaoLoja;
     }
@@ -540,5 +541,11 @@ public class telaDoUsuario extends javax.swing.JFrame {
     public void setTfIdLoja(JTextField tfIdLoja) {
         this.tfIdLoja = tfIdLoja;
     }
+    
+    
+    
+    
+    
+
 
 }

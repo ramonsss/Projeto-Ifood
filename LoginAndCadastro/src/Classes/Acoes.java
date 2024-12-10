@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import loginandcadastro.ProgressBar;
 import telaAdmin.CadastrarLoja;
 import telaAdmin.ListarLojasCadastradas;
 import telaAdmin.telaDoAdministrador;
@@ -36,10 +37,6 @@ public class Acoes extends javax.swing.JFrame {
     private String senha;
     private boolean valorBooleano;
 
-   
-    public Acoes() {}
-    
-    
     public Acoes(int id) {
 
         this.id = id;
@@ -238,18 +235,27 @@ public class Acoes extends javax.swing.JFrame {
                     lojistaFrame.setLocationRelativeTo(null); // Para abrir sempre no centro da tela
                 } // AQUI EH A VERIFICAÇÃO, SE O LOGIN POSTO FOR O DO USUARIO EH PARA ABRIR MINHA CLASSE USUARIO
                 else {
-                    telaDoUsuario usuarioFrame = new telaDoUsuario();
+                    
 
-                    listarLojas(usuarioFrame);
+                    ProgressBar p = new ProgressBar();
+                    p.setVisible(true);
+                    this.dispose();
+                
+//                    telaDoUsuario usuarioFrame = new telaDoUsuario();
+//
+//                    listarLojas(usuarioFrame);
 
-                    usuarioFrame.setVisible(true);
-                    usuarioFrame.pack();
-                    usuarioFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
-                }
+//                    usuarioFrame.setVisible(true);
+//                    usuarioFrame.pack();
+//                    usuarioFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
+                    
+                    
+               }
+                        
 
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário/Senha incorreto");
-            }
+            } 
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -372,6 +378,10 @@ public class Acoes extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
+    
+    // Função para realizar a progressão da barra
+    
+
 
     public int getId() {
         return id;
