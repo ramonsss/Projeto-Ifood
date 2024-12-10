@@ -293,7 +293,7 @@ public class telaDoUsuario extends javax.swing.JFrame {
     private void btnListarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarProdutoActionPerformed
         // TODO add your handling code here:
 
-        ListarProdutoUsuario listarProdutoFrame = new ListarProdutoUsuario(Integer.parseInt(tfIdLoja.getText()));
+        ListarProdutoUsuario listarProdutoFrame = new ListarProdutoUsuario(Integer.parseInt(tfIdLoja.getText()), produtoInfo);
 
         CadastrarProduto cadastrarProduto = new CadastrarProduto();
 

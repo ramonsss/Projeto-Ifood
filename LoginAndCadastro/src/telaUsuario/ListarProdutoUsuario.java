@@ -46,10 +46,12 @@ public class ListarProdutoUsuario extends javax.swing.JFrame {
         initComponents();
     }
 
-    public ListarProdutoUsuario(int idDaLojaPfvFunciona) {
+    public ListarProdutoUsuario(int idDaLojaPfvFunciona, ArrayList<String> produtoInfo) {
         initComponents();
         this.idDaLojaPfvFunciona = idDaLojaPfvFunciona;
+        this.produtoInfo = produtoInfo;
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -333,25 +335,20 @@ public class ListarProdutoUsuario extends javax.swing.JFrame {
 
             ResultSet rs = stmt.executeQuery();
 
-            // Verificar se já existe um carrinho para a loja
-            ArrayList<String> carrinhoAtual = carrinhosPorLoja.get(idDaLojaPfvFunciona);
-            if (carrinhoAtual == null) {
-                carrinhoAtual = new ArrayList<>();
-                carrinhosPorLoja.put(idDaLojaPfvFunciona, carrinhoAtual);
-            }
+            
 
             // Adicionar o produto ao carrinho da loja
             if (rs.next()) {
-                carrinhoAtual.add("ID: " + rs.getInt("id_produto"));
-                carrinhoAtual.add("Nome: " + rs.getString("nome_produto"));
-                carrinhoAtual.add("Preço: " + rs.getDouble("preco"));
-                carrinhoAtual.add("Descrição: " + rs.getString("descricao_produto"));
-                carrinhoAtual.add("Tempo de Preparo: " + rs.getString("tempo_preparo"));
+                produtoInfo.add("ID: " + rs.getInt("id_produto"));
+                produtoInfo.add("Nome: " + rs.getString("nome_produto"));
+                produtoInfo.add("Preço: " + rs.getDouble("preco"));
+                produtoInfo.add("Descrição: " + rs.getString("descricao_produto"));
+                produtoInfo.add("Tempo de Preparo: " + rs.getString("tempo_preparo"));
 
                 JOptionPane.showMessageDialog(null, "Produto adicionado ao carrinho!");
 
                 System.out.println("Carrinho da Loja " + idDaLojaPfvFunciona + ":");
-                for (String info : carrinhoAtual) {
+                for (String info : produtoInfo) {
                     System.out.println(info);
                 }
             } else {

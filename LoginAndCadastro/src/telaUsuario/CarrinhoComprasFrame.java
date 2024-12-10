@@ -88,7 +88,7 @@ public class CarrinhoComprasFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-        System.out.println("Aqui eh na classe Carrinho Compras");
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\nAqui eh na classe Carrinho Compras E O TESTE FINAL SE TUDO FUNCIONOU:\n");
         for (String info : produtoInfo) {
             System.out.println(info);
         }
