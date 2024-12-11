@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import loginandcadastro.Login;
 import telaLojista.TelaDoLojista;
 
 /**
@@ -34,19 +35,28 @@ public class RemoverLojas extends javax.swing.JFrame {
     public void setVerifica(boolean verifica) {
         this.verifica = verifica;
     }
-   
-    
-    
+
+    int id_usuario;
+
+    public int getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
     /**
      * Creates new form RemoverLojas
      */
     public RemoverLojas() {
         initComponents();
     }
-    
-    public RemoverLojas(boolean verificacao) {
+
+    public RemoverLojas(boolean verificacao, int id_usuario) {
         initComponents();
         this.verifica = verificacao;
+        this.id_usuario = id_usuario;
     }
 
     /**
@@ -321,32 +331,28 @@ public class RemoverLojas extends javax.swing.JFrame {
 
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
         // TODO add your handling code here:
-        
+
         if (verifica == false) {
             telaDoAdministrador adminFrame = new telaDoAdministrador();
             adminFrame.setVisible(true);
             adminFrame.pack();
             adminFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
             this.dispose();
-            
+
             System.out.println("eh adm");
-            
-            
+
         } else if (verifica == true) {
-            
+
             System.out.println("Eh lojista");
-            
-            TelaDoLojista lojistaFrame = new TelaDoLojista();
+
+            Login lojistaFrame = new Login();
             lojistaFrame.setVisible(true);
             lojistaFrame.pack();
             lojistaFrame.setLocationRelativeTo(null); // Para abrir sempre no centro da tela
             this.dispose();
         }
-        
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_voltarActionPerformed
 
     private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirActionPerformed
@@ -413,15 +419,17 @@ public class RemoverLojas extends javax.swing.JFrame {
 
             ResultSet rs = stmt.executeQuery();
 
-            while (rs.next()) {
+            if (rs.next()) {
                 tfIdLoja.setText(rs.getString("id"));
                 tfNomeLoja.setText(rs.getString("nome"));
                 tfCnpjLoja.setText(rs.getString("cnpj"));
                 tfLocalizacaoLoja.setText(rs.getString("localizacao"));
+
                 //* * * * * * * * * * * * * * * * * para mostrar a imagem * * * * * * * * * ***** * * * * * * * * * * * * * * * * *
                 Blob blob = (Blob) rs.getBlob("imagem");
                 byte[] img = blob.getBytes(1, (int) blob.length());
                 BufferedImage imagem = null;
+
                 try {
                     imagem = ImageIO.read(new ByteArrayInputStream(img));
                 } catch (Exception e) {
@@ -432,8 +440,11 @@ public class RemoverLojas extends javax.swing.JFrame {
                 Icon foto = new ImageIcon(icone.getImage().getScaledInstance(lblFoto.getWidth(),
                         lblFoto.getHeight(), Image.SCALE_SMOOTH));
                 lblFoto.setIcon(foto);
-//              ********************************************************************************************************************
-
+                // ********************************************************************************************************************
+            } else {
+                // Se não houver resultado, exibe uma mensagem informando que o ID não existe
+                JOptionPane.showMessageDialog(null, "A loja não existe ou já foi removido...");
+                // Aqui você pode também mostrar uma mensagem para o usuário na interface gráfica
             }
 
             stmt.close();
@@ -453,17 +464,17 @@ public class RemoverLojas extends javax.swing.JFrame {
 
                 Connection con = Conexao.faz_conexao();
 
-                // verificação se o ID existe
-                String verificaSql = "SELECT id FROM dados_lojas WHERE id = ?";
+                // Verificação se o ID da loja pertence ao usuário logado
+                String verificaSql = "SELECT id FROM dados_lojas WHERE id = ? AND id_usuario = ?";
                 PreparedStatement verificaStmt = con.prepareStatement(verificaSql);
                 verificaStmt.setString(1, tfBusca.getText());
+                verificaStmt.setInt(2, id_usuario); // `idDoUsuario` deve ser definido como o ID do usuário logado
                 ResultSet rs = verificaStmt.executeQuery();
 
-                // verificação se o ID existe no banco de dados
                 if (!rs.next()) {
-                    JOptionPane.showMessageDialog(null, "O iD informado não existe ou já foi excluido.");
+                    JOptionPane.showMessageDialog(null, "Você não tem permissão para excluir essa loja ou ela já foi excluída.");
                 } else {
-                    // se o ID existe, ele pede a confirmação para excluir
+                    // Confirmação para excluir
                     int confirmacao = JOptionPane.showConfirmDialog(
                             null,
                             "Esta ação não pode ser desfeita. Quer continuar?",
@@ -472,13 +483,14 @@ public class RemoverLojas extends javax.swing.JFrame {
                     );
 
                     if (confirmacao == JOptionPane.YES_OPTION) {
-                        // executa o DELETE
-                        String sql = "DELETE FROM dados_lojas WHERE id = ?";
+                        // Executa o DELETE
+                        String sql = "DELETE FROM dados_lojas WHERE id = ? AND id_usuario = ?";
                         PreparedStatement stmt = con.prepareStatement(sql);
                         stmt.setString(1, tfBusca.getText());
+                        stmt.setInt(2, id_usuario);
                         stmt.execute();
 
-                        JOptionPane.showMessageDialog(null, "Loja removido com Sucesso!");
+                        JOptionPane.showMessageDialog(null, "Loja removida com Sucesso!");
                         tfIdLoja.setText("");
                         tfNomeLoja.setText("");
                         tfCnpjLoja.setText("");
@@ -506,7 +518,7 @@ public class RemoverLojas extends javax.swing.JFrame {
         tfNomeLoja.setText("");
         tfCnpjLoja.setText("");
         tfLocalizacaoLoja.setText("");
-        
+
         lblFoto.setIcon(new ImageIcon(RemoverLojas.class.getResource("/icon/camera.png")));
 
     }

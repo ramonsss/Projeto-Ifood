@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package telaAdmin;
+
 import classes_de_conexao.Conexao;
 import java.sql.*;
 import javax.swing.JOptionPane;
@@ -357,99 +358,101 @@ public class RemoverUsuario extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void verificarUsuarioPorId() {
-        
+
         try {
-            
-           Connection con = Conexao.faz_conexao();
-            
-           String sql = "select * from dados_senhas where id like ?";
-            
-           PreparedStatement stmt = con.prepareStatement(sql);
-           
-           stmt.setString(1, "%" + tfBusca.getText());
-                        
-           ResultSet rs = stmt.executeQuery();
-           
-           while(rs.next()) {
-               tfUsuario.setText(rs.getString("usuario"));
-               tfEmail.setText(rs.getString("email"));
-               tfCep.setText(rs.getString("cep"));
-           }
-           
-           stmt.close();
-           con.close();
-            
-           
+
+            Connection con = Conexao.faz_conexao();
+
+            String sql = "select * from dados_senhas where id = ?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            stmt.setString(1, tfBusca.getText());
+
+            ResultSet rs = stmt.executeQuery();
+
+            // Verifica se o ResultSet tem algum dado
+            if (rs.next()) {
+                // Se tiver resultado, preenche os campos com os dados encontrados
+                tfUsuario.setText(rs.getString("usuario"));
+                tfEmail.setText(rs.getString("email"));
+                tfCep.setText(rs.getString("cep"));
+            } else {
+                // Se não houver resultado, exibe uma mensagem informando que o ID não existe
+                JOptionPane.showMessageDialog(null, "Usuário não existe, ou já foi removido...");
+                // Aqui você pode também mostrar uma mensagem para o usuário na interface gráfica
+            }
+
+            stmt.close();
+            con.close();
+
         } catch (SQLException e) {
             System.out.println(e);
         }
-        
-        
+
     }
-    
+
     public void cancelar() {
         tfUsuario.setText("");
         tfEmail.setText("");
         tfCep.setText("");
     }
-    
-    
+
     public void removerUsuario() {
-    if (tfBusca.getText().equals("")) {
-        JOptionPane.showMessageDialog(null, "Informe um Id por favor");
-    } else {
-        try {
-            
-            Connection con = Conexao.faz_conexao();
+        if (tfBusca.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Informe um Id por favor");
+        } else {
+            try {
 
-            // verificação se o ID existe
-            String verificaSql = "SELECT id FROM dados_senhas WHERE id = ?";
-            PreparedStatement verificaStmt = con.prepareStatement(verificaSql);
-            verificaStmt.setString(1, tfBusca.getText());
-            ResultSet rs = verificaStmt.executeQuery();
+                Connection con = Conexao.faz_conexao();
 
-            // verificação se o ID existe no banco de dados
-            if (!rs.next()) {
-                JOptionPane.showMessageDialog(null, "O iD informado não existe ou já foi excluido.");
-            } else {
-                // se o ID existe, ele pede a confirmação para excluir
-                int confirmacao = JOptionPane.showConfirmDialog(
-                    null,
-                    "Esta ação não pode ser desfeita. Quer continuar?",
-                    "Confirmação de Exclusão",
-                    JOptionPane.YES_NO_OPTION
-                );
+                // verificação se o ID existe
+                String verificaSql = "SELECT id FROM dados_senhas WHERE id = ?";
+                PreparedStatement verificaStmt = con.prepareStatement(verificaSql);
+                verificaStmt.setString(1, tfBusca.getText());
+                ResultSet rs = verificaStmt.executeQuery();
 
-                if (confirmacao == JOptionPane.YES_OPTION) {
-                    // executa o DELETE
-                    String sql = "DELETE FROM dados_senhas WHERE id = ?";
-                    PreparedStatement stmt = con.prepareStatement(sql);
-                    stmt.setString(1, tfBusca.getText());
-                    stmt.execute();
-
-                    JOptionPane.showMessageDialog(null, "Usuário removido com Sucesso!");
-                    tfUsuario.setText("");
-                    tfEmail.setText("");
-                    tfCep.setText("");
-
-                    stmt.close();
+                // verificação se o ID existe no banco de dados
+                if (!rs.next()) {
+                    JOptionPane.showMessageDialog(null, "O iD informado não existe ou já foi excluido.");
                 } else {
-                    JOptionPane.showMessageDialog(null, "A remoção foi cancelada.");
+                    // se o ID existe, ele pede a confirmação para excluir
+                    int confirmacao = JOptionPane.showConfirmDialog(
+                            null,
+                            "Esta ação não pode ser desfeita. Quer continuar?",
+                            "Confirmação de Exclusão",
+                            JOptionPane.YES_NO_OPTION
+                    );
+
+                    if (confirmacao == JOptionPane.YES_OPTION) {
+                        // executa o DELETE
+                        String sql = "DELETE FROM dados_senhas WHERE id = ?";
+                        PreparedStatement stmt = con.prepareStatement(sql);
+                        stmt.setString(1, tfBusca.getText());
+                        stmt.execute();
+
+                        JOptionPane.showMessageDialog(null, "Usuário removido com Sucesso!");
+                        tfUsuario.setText("");
+                        tfEmail.setText("");
+                        tfCep.setText("");
+
+                        stmt.close();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "A remoção foi cancelada.");
+                    }
                 }
+
+                verificaStmt.close();
+                rs.close();
+                con.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-
-            
-            verificaStmt.close();
-            rs.close();
-            con.close();
-
-        } catch (SQLException e) {
-            e.printStackTrace(); 
         }
     }
-}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

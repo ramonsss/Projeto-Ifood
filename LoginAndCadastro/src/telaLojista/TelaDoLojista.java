@@ -322,8 +322,9 @@ public class TelaDoLojista extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
 
-        RemoverLojas RemoverLojas = new RemoverLojas(verificacao);
+        RemoverLojas RemoverLojas = new RemoverLojas(verificacao, getIdDoUsuario());
         RemoverLojas.setVerifica(verificacao);
+        RemoverLojas.setId_usuario(idDoUsuario);
         
         
         RemoverLojas.setVisible(true);
