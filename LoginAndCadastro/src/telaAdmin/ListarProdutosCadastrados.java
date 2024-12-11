@@ -6,7 +6,7 @@ package telaAdmin;
 
 import classes_de_conexao.Conexao;
 
-import Classes.Loja;
+import Classes.Lojas.Loja;
 import classes_de_conexao.Conexao;
 import loginandcadastro.Login;
 import loginandcadastro.LoginAndCadastro;

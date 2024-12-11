@@ -271,15 +271,21 @@ public class Acoes extends javax.swing.JFrame {
                     usuarioFrame.setLocationRelativeTo(null); // para abrir sempre no centro da tela
                 }
 
+                
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário/Senha incorreto");
             }
             
 
+            
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        this.dispose();
+        
     }
 
     public void listarLojas(telaDoUsuario usuarioFrame) {

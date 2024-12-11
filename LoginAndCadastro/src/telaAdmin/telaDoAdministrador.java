@@ -4,7 +4,7 @@
  */
 package telaAdmin;
 
-import Classes.Loja;
+import Classes.Lojas.Loja;
 import classes_de_conexao.Conexao;
 import loginandcadastro.Login;
 import loginandcadastro.LoginAndCadastro;
@@ -330,137 +330,18 @@ public class telaDoAdministrador extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-
-        listarLojas();
+        
+        ListarLojasCadastradas listarLojasCadastradas = new ListarLojasCadastradas();
+        
+        Loja loja = new Loja();
+        
+        loja.listarLoja(listarLojasCadastradas);
+        
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    public void listarLojas() {
-
-        ListarLojasCadastradas listarLojasCadastradasFrame = new ListarLojasCadastradas();
-
-        try {
-
-            Connection con = Conexao.faz_conexao();
-//             
-            String sql = "SELECT * FROM dados_lojas";
-
-            PreparedStatement stmt = con.prepareStatement(
-                    sql,
-                    ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY
-            );
-            ResultSet rs = stmt.executeQuery();
-
-            //lista para armazenar as lojas
-            ArrayList<Loja> lojas = new ArrayList<>();
-            int currentIndex = -1;
-
-            if (rs.next()) {
-                listarLojasCadastradasFrame.getTfIdLoja().setText(rs.getString("id"));
-                listarLojasCadastradasFrame.getTfNomeLoja().setText(rs.getString("nome"));
-                listarLojasCadastradasFrame.getTfCnpjLoja().setText(rs.getString("cnpj"));
-                listarLojasCadastradasFrame.getTfLocalizacaoLoja().setText(rs.getString("localizacao"));
-
-//              ****************************************para mostrar a imagem ******************************************************
-                Blob blob = (Blob) rs.getBlob("imagem");
-                byte[] img = blob.getBytes(1, (int) blob.length());
-                BufferedImage imagem = null;
-                try {
-                    imagem = ImageIO.read(new ByteArrayInputStream(img));
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-
-                ImageIcon icone = new ImageIcon(imagem);
-                Icon foto = new ImageIcon(icone.getImage().getScaledInstance(listarLojasCadastradasFrame.getLblFoto().getWidth(),
-                        listarLojasCadastradasFrame.getLblFoto().getHeight(), Image.SCALE_SMOOTH));
-                listarLojasCadastradasFrame.getLblFoto().setIcon(foto);
-//              ********************************************************************************************************************
     
-                
-
-
-            }
-
-            listarLojasCadastradasFrame.getListarLojaBtnProximo().addActionListener(e -> {
-
-                try {
-
-                    if (rs.next()) {
-                        atualizarInterface(listarLojasCadastradasFrame, rs);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "aqui é um aviso para mostrar que estou muito"
-                                + " coringado nesta parte e implorando por sanidade"
-                                + " mental, e que não tem mais lojas para aparecer.");
-                    }
-
-                } catch (SQLException ex) {
-                    System.out.println(ex);
-                }
-
-            });
-
-            listarLojasCadastradasFrame.getListarLojaBtnVoltar().addActionListener(e -> {
-
-                try {
-
-                    if (rs.previous()) {
-                        atualizarInterface(listarLojasCadastradasFrame, rs);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "aqui é um aviso para mostrar que estou muito"
-                                + " coringado nesta parte e implorando por sanidade"
-                                + " mental, e que não tem mais lojas para aparecer.");
-                    }
-
-                } catch (SQLException exyz) {
-                    System.out.println(exyz);
-                }
-
-            });
-
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-
-        }
-
-        listarLojasCadastradasFrame.setVisible(true);
-        listarLojasCadastradasFrame.pack();
-        listarLojasCadastradasFrame.setLocationRelativeTo(null); // Para abrir sempre no centro da tela
-        this.dispose();
-
-    }
-
-    private void atualizarInterface(ListarLojasCadastradas listarLojasCadastradasFrame, ResultSet rs) {
-        try {
-            // Atualiza os campos com os dados do ResultSet
-            listarLojasCadastradasFrame.getTfIdLoja().setText(rs.getString("id"));
-            listarLojasCadastradasFrame.getTfNomeLoja().setText(rs.getString("nome"));
-            listarLojasCadastradasFrame.getTfCnpjLoja().setText(rs.getString("cnpj"));
-            listarLojasCadastradasFrame.getTfLocalizacaoLoja().setText(rs.getString("localizacao"));
-
-            // Para mostrar a imagem
-            Blob blob = (Blob) rs.getBlob("imagem");
-            byte[] img = blob.getBytes(1, (int) blob.length());
-            BufferedImage imagem = null;
-            try {
-                imagem = ImageIO.read(new ByteArrayInputStream(img));
-            } catch (Exception ex) {
-                System.out.println(ex);
-            }
-
-            ImageIcon icone = new ImageIcon(imagem);
-            Icon foto = new ImageIcon(icone.getImage().getScaledInstance(
-                    listarLojasCadastradasFrame.getLblFoto().getWidth(),
-                    listarLojasCadastradasFrame.getLblFoto().getHeight(),
-                    Image.SCALE_SMOOTH));
-            listarLojasCadastradasFrame.getLblFoto().setIcon(foto);
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
+    
 
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

@@ -246,9 +246,8 @@ public class Login extends javax.swing.JFrame {
 
         Acoes ac = new Acoes(tfUsuario.getText(), "", "", pfSenha.getText(), true);
         ac.login();
-
-        this.dispose(); // Fecha a minha tela de login
-
+        
+        this.dispose();
 
     }//GEN-LAST:event_btnEntrarActionPerformed
 

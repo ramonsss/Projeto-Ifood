@@ -25,7 +25,6 @@ import telaLojista.TelaDoLojista;
  */
 public class CadastrarProduto extends javax.swing.JFrame {
 
-    
     private boolean verificar;
 
     public boolean isVerificar() {
@@ -35,18 +34,14 @@ public class CadastrarProduto extends javax.swing.JFrame {
     public void setVerificar(boolean verificar) {
         this.verificar = verificar;
     }
-    
-    
-    
-    
-    
+
     /**
      * Creates new form CadastrarProduto
      */
     public CadastrarProduto() {
         initComponents();
     }
-    
+
     public CadastrarProduto(boolean verifica) {
         initComponents();
         this.verificar = verifica;
@@ -306,8 +301,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
         // TODO add your handling code here:
-        
-        
+
         if (verificar == false) {
             telaDoAdministrador adminFrame = new telaDoAdministrador();
             adminFrame.setVisible(true);
@@ -327,8 +321,8 @@ public class CadastrarProduto extends javax.swing.JFrame {
             lojistaFrame.setLocationRelativeTo(null); // Para abrir sempre no centro da tela
             this.dispose();
         }
-        
-        
+
+
     }//GEN-LAST:event_voltarActionPerformed
 
     private void tfNomeDoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNomeDoProdutoActionPerformed
@@ -363,8 +357,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
     public void setIdDaLoja(int IdDaLoja) {
         this.IdDaLoja = IdDaLoja;
     }
-   
-    
+
 
     private void btnCadastrarProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarProdutosActionPerformed
         // TODO add your handling code here:
@@ -375,8 +368,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         String descricao = tfDescricao.getText();
         String tempoPreparo = tfTempoDePreparo.getText();
         byte[] imagem = null;
-        
-        
+
         try {
 
             Connection con = Conexao.faz_conexao();
@@ -399,12 +391,15 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
             if (confirma == 1) {
                 JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
-                
+
                 // Criando um novo objeto do tipo Produto para poder botar no meu arrayList e adicionar no carrinho
                 Produto produto = new Produto(nome, preco, descricao, tempoPreparo);
-                
+
+                // Adicionando o produto no ArrayList de produtos
+                Produto.adicionarProduto(produto);
+
                 atualizarCarrinhoNaInterface();
-                
+
             } else {
                 JOptionPane.showMessageDialog(null, "Erro ao cadastrar o produto :(");
             }
@@ -427,15 +422,10 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnCadastrarProdutosActionPerformed
 
-    
     private void atualizarCarrinhoNaInterface() {
-    
-        
-        
+
     }
-    
-    
-    
+
     /**
      * @param args the command line arguments
      */

@@ -5,7 +5,7 @@
 package telaAdmin;
 
 import Classes.Acoes;
-import Classes.Loja;
+import Classes.Lojas.Loja;
 import classes_de_conexao.Conexao;
 import com.mysql.cj.jdbc.Blob;
 import java.awt.Image;
@@ -337,7 +337,7 @@ public class CadastrarLoja extends javax.swing.JFrame {
             
             System.out.println("Eh lojista");
             
-            TelaDoLojista lojistaFrame = new TelaDoLojista();
+            Login lojistaFrame = new Login();
             lojistaFrame.setVisible(true);
             lojistaFrame.pack();
             lojistaFrame.setLocationRelativeTo(null); // Para abrir sempre no centro da tela

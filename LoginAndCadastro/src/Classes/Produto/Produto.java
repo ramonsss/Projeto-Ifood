@@ -4,6 +4,8 @@
  */
 package Classes.Produto;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Ramon Souza
@@ -14,6 +16,8 @@ public class Produto {
     private double preco;
     private String descricao;
     private String tempoPreparo;
+
+    private static ArrayList<Produto> produtos = new ArrayList<>();
 
     // Construtor
     public Produto(String nome, double preco, String descricao, String tempoPreparo) {
@@ -54,6 +58,26 @@ public class Produto {
 
     public void setTempoPreparo(String tempoPreparo) {
         this.tempoPreparo = tempoPreparo;
+    }
+
+    // Método para adicionar um produto ao ArrayList
+    public static void adicionarProduto(Produto produto) {
+        produtos.add(produto);
+    }
+
+    public static ArrayList<Produto> getProdutos() {
+        return produtos;
+    }
+
+    // Método para listar todos os produtos cadastrados
+    public static void listarProdutos() {
+        for (Produto produto : produtos) {
+            System.out.println("Nome: " + produto.getNome());
+            System.out.println("Preço: " + produto.getPreco());
+            System.out.println("Descrição: " + produto.getDescricao());
+            System.out.println("Tempo de preparo: " + produto.getTempoPreparo());
+            System.out.println("----------------------------------------------");
+        }
     }
 
 }
