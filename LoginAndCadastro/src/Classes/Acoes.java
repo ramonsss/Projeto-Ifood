@@ -4,9 +4,9 @@
  */
 package Classes;
 
-import Classes.Usuario.Cliente;
-import Classes.Usuario.DonoLoja;
-import Classes.Usuario.Usuario;
+import Classes.Usuarios.Cliente;
+import Classes.Usuarios.DonoLoja;
+import Classes.Usuarios.Usuario;
 import classes_de_conexao.Conexao;
 import java.awt.Image;
 import java.awt.image.BufferedImage;

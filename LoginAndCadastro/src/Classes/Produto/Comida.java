@@ -8,7 +8,7 @@ package Classes.Produto;
  *
  * @author Ramon Souza
  */
-public class Comida extends Produto {
+public class Comida extends Produtos {
 
     public Comida(String nome, double preco, String descricao, String tempoPreparo) {
         super(nome, preco, descricao, tempoPreparo);

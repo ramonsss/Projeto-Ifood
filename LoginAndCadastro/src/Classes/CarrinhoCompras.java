@@ -4,7 +4,7 @@
  */
 package Classes;
 
-import Classes.Produto.Produto;
+import Classes.Produto.Produtos;
 import java.util.ArrayList;
 
 /**
@@ -15,19 +15,19 @@ public class CarrinhoCompras {
 
     public class CarrinhoDeCompras {
 
-        private ArrayList<Produto> produtos;
+        private ArrayList<Produtos> produtos;
 
         public CarrinhoDeCompras() {
             produtos = new ArrayList<>();
         }
 
         // Método para adicionar um produto ao carrinho
-        public void adicionarProduto(Produto produto) {
+        public void adicionarProduto(Produtos produto) {
             produtos.add(produto);
         }
 
         // Método para obter todos os produtos do carrinho
-        public ArrayList<Produto> getProdutos() {
+        public ArrayList<Produtos> getProdutos() {
             return produtos;
         }
 

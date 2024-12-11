@@ -4,7 +4,7 @@
  */
 package telaAdmin;
 
-import Classes.Produto.Produto;
+import Classes.Produto.Produtos;
 import classes_de_conexao.Conexao;
 import java.awt.Image;
 import java.io.FileInputStream;
@@ -393,10 +393,10 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
 
                 // Criando um novo objeto do tipo Produto para poder botar no meu arrayList e adicionar no carrinho
-                Produto produto = new Produto(nome, preco, descricao, tempoPreparo);
+                Produtos produto = new Produtos(nome, preco, descricao, tempoPreparo);
 
                 // Adicionando o produto no ArrayList de produtos
-                Produto.adicionarProduto(produto);
+                Produtos.adicionarProduto(produto);
 
                 atualizarCarrinhoNaInterface();
 

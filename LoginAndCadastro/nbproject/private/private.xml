@@ -5,20 +5,19 @@
             <url>src/telaAdmin/telaDoAdministrador.java</url>
             <bookmark id="1">
                 <name/>
-                <line>344</line>
+                <line>342</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/telaAdmin/CadastrarProduto.java</file>
-            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/Classes/CarrinhoCompras.java</file>
-            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/telaUsuario/telaDoUsuario.java</file>
+            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/telaAdmin/ListarProdutosCadastrados.java</file>
             <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/Classes/Acoes.java</file>
-            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/telaUsuario/CarrinhoComprasFrame.java</file>
-            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/telaUsuario/ListarProdutoUsuario.java</file>
-            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/loginandcadastro/Login.java</file>
+            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/telaAdmin/RemoverLojas.java</file>
+            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/telaAdmin/ListarLojasCadastradas.java</file>
+            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/telaLojista/TelaDoLojista.java</file>
+            <file>file:/C:/Users/Ramon%20Souza/Documents/NetBeansProjects/LoginAndCadastro/src/Classes/Lojas/Loja.java</file>
         </group>
     </open-files>
 </project-private>

@@ -2,16 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Classes.Produto;
+package Classes.Usuarios;
 
 /**
  *
  * @author Ramon Souza
  */
-public class Bebida extends Produtos {
+public class DonoLoja extends Usuario {
 
-    public Bebida(String nome, double preco, String descricao, String tempoPreparo) {
-        super(nome, preco, descricao, tempoPreparo);
+    public DonoLoja(String nome, String senha, String email, String cep, boolean isDonoVer) {
+        super(nome, senha, email, cep, isDonoVer);
     }
 
 }
